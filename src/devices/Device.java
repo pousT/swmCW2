@@ -3,20 +3,20 @@ package devices;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Device implements Observer,Runnable {
-	
+public abstract class Device implements Observer, Runnable {
+
 	private int deviceId;
 	private int carId;
 	private int state;
-    private int power;
+	private int power;
 
 	public Device(int deviceId, int carId) {
-		this.setDeviceId(deviceId);	
+		this.setDeviceId(deviceId);
 		this.carId = carId;
-		this.state = 0;	 
+		this.state = 0;
 		System.out.println("Car " + carId + "  Device " + deviceId + " created");
 	}
- 
+
 	public int getDeviceId() {
 		return deviceId;
 	}
@@ -24,21 +24,21 @@ public class Device implements Observer,Runnable {
 	public void setDeviceId(int deviceId) {
 		this.deviceId = deviceId;
 	}
-	 
+
 	public int getPower() {
 		return power;
 	}
-	
+
 	public void setPower(int power) {
 		this.power = power;
 	}
-	
-	public int getState(){
+
+	public int getState() {
 		System.out.println("device " + deviceId + " state = " + state);
 		return this.state;
 	}
-	
-	public void setState(int newState){
+
+	public void setState(int newState) {
 		this.state = newState;
 		System.out.println("Car " + carId + "  Device " + deviceId + " new state = " + state);
 	}
@@ -46,7 +46,7 @@ public class Device implements Observer,Runnable {
 	public void notifySensor(int state) {
 		System.out.println("!!!!");
 	}
-	
+
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
@@ -63,9 +63,9 @@ public class Device implements Observer,Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		int preState;
-		while(true){
+		while (true) {
 			preState = this.state;
-			while(preState==this.state)
+			while (preState == this.state)
 				;
 			preState = this.state;
 			notifySensor(this.state);
