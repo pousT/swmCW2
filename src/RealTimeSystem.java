@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
 
+import devices.Device;
+
 public class RealTimeSystem extends Observable {
 
 	private static Simulator instance;

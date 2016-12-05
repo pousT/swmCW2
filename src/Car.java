@@ -1,6 +1,8 @@
 
 import java.util.ArrayList;
 
+import devices.Device;
+
 public class Car {
     final static int d1Value = 300; //speed sensor
     final static int d2Value = 300; //lidar sensor
