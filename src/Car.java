@@ -2,6 +2,7 @@
 import java.util.ArrayList;
 
 import devices.Device;
+import devices.DeviceFactory;
 
 public class Car {
     final static int d1Value = 300; //speed sensor
@@ -10,7 +11,7 @@ public class Car {
     final static int d4Value = 1200;//accelerometer
     final static int d5Value = 150; //gyroscope
     final static int defaultValue = 100;       // This values are used to set power for specified devices.
-    
+    private DeviceFactory deviceFactory; // use device factory to create different devices
 	private int carId;
 	public ArrayList<Device> devices;
 	
@@ -19,32 +20,16 @@ public class Car {
 		this.setDevices(new ArrayList<Device>());
 //		System.out.println("car " + carId + " created");
 	}
-	
+/**
+ * This method use factory to create new device and add it to car	
+ * @param deviceId device id
+ * 
+ */
 	public void addNewDevice(int deviceId){
-		Device device = new Device(deviceId,carId);
+		Device device = deviceFactory.createDevice(deviceId,carId); // create device use factoty
 		new Thread(device).start();
 		devices.add(device);
 		
-		switch (deviceId) {
-		 case 01 :
-			 device.setPower(d1Value);
-			 break;
-		 case 02 :
-			 device.setPower(d2Value);
-			 break;
-		 case 03 :
-			 device.setPower(d3Value);
-			 break;
-		 case 04 :
-			 device.setPower(d4Value);
-			 break;
-		 case 05 :
-			 device.setPower(d5Value);
-			 break;
-		 default:
-			 device.setPower(defaultValue);
-			 break;
-		}
 	}
 
 	public int getCarId() {
