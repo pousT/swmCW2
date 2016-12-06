@@ -3,17 +3,22 @@ package devices;
 import java.util.Observable;
 import java.util.Observer;
 
-public abstract class Device implements Observer, Runnable {
+public class Device implements Observer, Runnable {
 
 	private int deviceId;
 	private int carId;
 	private int state;
 	private int power;
-
+/**
+ * create a specified device, set power to 100
+ * @param deviceId id of device
+ * @param carId id of car
+ */
 	public Device(int deviceId, int carId) {
 		this.setDeviceId(deviceId);
 		this.carId = carId;
 		this.state = 0;
+		this.setPower(100);
 		System.out.println("Car " + carId + "  Device " + deviceId + " created");
 	}
 
