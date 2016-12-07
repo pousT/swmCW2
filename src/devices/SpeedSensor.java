@@ -11,5 +11,8 @@ public class SpeedSensor extends Device {
 		setPower(300);
 		// TODO Auto-generated constructor stub
 	}
-
+	@Override
+	public String toString() {
+		return "Car "+ this.getCarId() +  " Device " + this.getDeviceId() + " speed sensor created";
+	}
 }

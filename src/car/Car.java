@@ -1,3 +1,4 @@
+package car;
 
 import java.util.ArrayList;
 
@@ -5,19 +6,18 @@ import devices.Device;
 import devices.DeviceFactory;
 
 public class Car {
-    final static int d1Value = 300; //speed sensor
-    final static int d2Value = 300; //lidar sensor
-    final static int d3Value = 500; //position sensor
-    final static int d4Value = 1200;//accelerometer
-    final static int d5Value = 150; //gyroscope
-    final static int defaultValue = 100;       // This values are used to set power for specified devices.
     private DeviceFactory deviceFactory; // use device factory to create different devices
 	private int carId;
 	public ArrayList<Device> devices;
-	
-	public Car(int carId) {
+	/**
+	 * 
+	 * @param carId e.g. 00, 01
+	 * @param factory device factory instance, used to create new device
+	 */
+	public Car(int carId, DeviceFactory factory) {
 		this.setCarId(carId);
 		this.setDevices(new ArrayList<Device>());
+		this.deviceFactory = factory;
 //		System.out.println("car " + carId + " created");
 	}
 /**

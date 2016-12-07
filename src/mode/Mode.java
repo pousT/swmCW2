@@ -1,3 +1,4 @@
+package mode;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,6 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import db.ConnectionDB;
+import functionality.ModeDevice;
+import simulator.Simulator;
 
 /**
  * This class is used to implement the auto mode.

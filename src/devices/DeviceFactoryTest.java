@@ -40,4 +40,9 @@ public class DeviceFactoryTest {
 		Device gyr = dFct.createDevice(gyroscope,10);
 		assertEquals(150, gyr.getPower());
 	}
+	@Test
+	public void testCreateOtherDevice() {
+		Device dvc = dFct.createDevice(10,10);
+		assertEquals(100, dvc.getPower());
+	}	
 }

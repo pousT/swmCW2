@@ -1,7 +1,11 @@
+package functionality;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+import db.ConnectionDB;
+import simulator.Simulator;
 
 /**
  * this class is used to delete object when user want to delete some devices.

@@ -9,6 +9,9 @@ import java.nio.file.WatchService;
 import java.sql.SQLException;
 import java.util.List;
 
+import db.ConnectionDB;
+import simulator.Simulator;
+
 /**
  * this class is used to monitor the folder which includes the Create.csv, Delete.csv, Mode.csv, ChangeState.csv 
  * once the folder's file is changed then can be monitored.

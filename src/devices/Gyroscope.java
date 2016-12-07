@@ -11,5 +11,8 @@ public class Gyroscope extends Device {
 		setPower(150);
 		// TODO Auto-generated constructor stub
 	}
-
+	@Override
+	public String toString() {
+		return "Car "+ this.getCarId() +  " Device " + this.getDeviceId() + " gyroscope created";
+	}
 }

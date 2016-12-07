@@ -1,3 +1,4 @@
+package functionality;
 
 /**
  * This abstract class is used to abstract the method of CreateDevice DeleteDevice, ChangeState, ModeDevice's sendCommand() 

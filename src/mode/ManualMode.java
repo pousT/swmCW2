@@ -1,9 +1,14 @@
+package mode;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import db.ConnectionDB;
+import functionality.ModeDevice;
+import simulator.Simulator;
 
 /**
  * this class is used to implement the User mode.

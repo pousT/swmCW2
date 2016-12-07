@@ -1,9 +1,15 @@
+package functionality;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Timer;
+
+import db.ConnectionDB;
+import mode.ManualMode;
+import mode.Mode;
+import simulator.Simulator;
 
 /**
  * this class is used to determine mode 

@@ -11,5 +11,8 @@ public class PositionSensor extends Device {
 		this.setPower(500);
 		// TODO Auto-generated constructor stub
 	}
-
+	@Override
+	public String toString() {
+		return "Car "+ this.getCarId() +  " Device " + this.getDeviceId() + " position sensor created";
+	}
 }

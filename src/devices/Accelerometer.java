@@ -11,5 +11,8 @@ public class Accelerometer extends Device {
 		setPower(1200);
 		// TODO Auto-generated constructor stub
 	}
-
+@Override
+public String toString() {
+	return "Car "+ this.getCarId() +  " Device " + this.getDeviceId() + " accelerometer created";
+}
 }

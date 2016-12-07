@@ -16,15 +16,15 @@ public class DeviceFactory implements IDeviceFactory {
 	 * @return 
 	 */
 	public Device createDevice(int deviceId, int carId) {
-		if ( deviceId== 1 ) {
+		if ( deviceId== speedSensor ) {
 			return new SpeedSensor(deviceId, carId);
-		} else if ( deviceId == 2 ) {
+		} else if ( deviceId == lidarSensor ) {
 			return new LidarSensor(deviceId, carId);
-		} else if ( deviceId == 3 ) {
+		} else if ( deviceId == positionSensor ) {
 			return new PositionSensor(deviceId, carId);
-		} else if (deviceId == 4) {
+		} else if (deviceId == accelerometer) {
 			return new Accelerometer(deviceId, carId);
-		} else if (deviceId == 5) {
+		} else if (deviceId == gyroscope) {
 			return new Gyroscope(deviceId, carId);
 		} else {
 			return new Device(deviceId, carId); // other specified device

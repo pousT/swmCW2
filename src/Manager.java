@@ -1,6 +1,13 @@
 
 import java.util.HashMap;
 
+import functionality.ChangeState;
+import functionality.CreateDevice;
+import functionality.DeleteDevice;
+import functionality.Functionality;
+import functionality.ModeDevice;
+import simulator.Simulator;
+
 /**
  * this class is used to manage the device.
  * 

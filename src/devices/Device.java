@@ -19,9 +19,14 @@ public class Device implements Observer, Runnable {
 		this.carId = carId;
 		this.state = 0;
 		this.setPower(100);
-		System.out.println("Car " + carId + "  Device " + deviceId + " created");
+		System.out.println(this.toString());
 	}
-
+	/**
+	 *  Device information, separated from constructor 
+	 */
+	public String toString() {
+		return "Car " + carId + " Device " + deviceId + " created";
+	}
 	public int getDeviceId() {
 		return deviceId;
 	}
@@ -47,7 +52,10 @@ public class Device implements Observer, Runnable {
 		this.state = newState;
 		System.out.println("Car " + carId + "  Device " + deviceId + " new state = " + state);
 	}
-
+	// add getter for carId, use in subclasses
+	public int getCarId() {
+		return carId;
+	}
 	public void notifySensor(int state) {
 		System.out.println("!!!!");
 	}
