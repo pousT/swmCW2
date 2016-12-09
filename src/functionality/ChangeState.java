@@ -18,7 +18,8 @@ public class ChangeState extends Functionality{
 		   this.simulator = simulator;
 	   }
 	   
-	   public void sendCommand(){
+	   @Override
+	public void sendCommand(){
 		   BufferedReader reader = null;
 	       try {
 	           reader = new BufferedReader(new FileReader("./InputCommand/ChangeState.csv"));

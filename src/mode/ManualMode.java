@@ -2,7 +2,6 @@ package mode;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

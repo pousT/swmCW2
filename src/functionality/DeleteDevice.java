@@ -17,7 +17,7 @@ public class DeleteDevice extends Functionality{
 	 ConnectionDB connect = ConnectionDB.getInstance();
 	  
 	 public DeleteDevice(Simulator simulator){
-		 this.simulator = simulator;
+		 DeleteDevice.simulator = simulator;
 	 }
 	 synchronized public static DeleteDevice getInstance() {
 		if(instance == null){
@@ -26,7 +26,8 @@ public class DeleteDevice extends Functionality{
 	    	return instance;
 	 }
 	   
-	   public void sendCommand(){
+	   @Override
+	public void sendCommand(){
 		   BufferedReader reader = null;
 	       try {
 	           reader = new BufferedReader(new FileReader("./InputCommand/Delete.csv"));

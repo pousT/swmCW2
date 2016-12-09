@@ -18,7 +18,7 @@ public class CreateDevice extends Functionality{
     
     
     public CreateDevice(Simulator simulator){
-	    this.simulator = simulator;
+	    CreateDevice.simulator = simulator;
     }
     
     private static CreateDevice instance;
@@ -30,7 +30,8 @@ public class CreateDevice extends Functionality{
 	}
 
     
-    public void sendCommand(){
+    @Override
+	public void sendCommand(){
     	System.out.println("......");
     	
 	    BufferedReader reader = null;

@@ -2,12 +2,14 @@ package car;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import devices.Device;
 import devices.DeviceFactory;
 
 public class Car {
     private DeviceFactory deviceFactory; // use device factory to create different devices
-	private int carId;
+	private IntegerProperty carId;
 	public ArrayList<Device> devices;
 	/**
 	 * 
@@ -15,7 +17,7 @@ public class Car {
 	 * @param factory device factory instance, used to create new device
 	 */
 	public Car(int carId, DeviceFactory factory) {
-		this.setCarId(carId);
+		this.carId = new SimpleIntegerProperty(carId);
 		this.setDevices(new ArrayList<Device>());
 		this.deviceFactory = factory;
 //		System.out.println("car " + carId + " created");
@@ -26,20 +28,32 @@ public class Car {
  * 
  */
 	public void addNewDevice(int deviceId){
-		Device device = deviceFactory.createDevice(deviceId,carId); // create device use factoty
+		Device device = deviceFactory.createDevice(deviceId,getCarId()); // create device use factoty
 		new Thread(device).start();
 		devices.add(device);
 		
 	}
-
+	/**
+	 * use get method of property to get int car id
+	 * @return car id
+	 */
 	public int getCarId() {
-		return carId;
+		return carId.get();
 	}
-
+	/**
+	 * use set method of property to set car id 
+	 * @param carId
+	 */
 	public void setCarId(int carId) {
-		this.carId = carId;
+		this.carId.set(carId);
 	}
-
+	/**
+	 * get car id property
+	 * @return integer property car id
+	 */
+    public IntegerProperty carIdProperty() {
+        return carId;
+    }
 	public ArrayList<Device> getDevices() {
 		return devices;
 	}

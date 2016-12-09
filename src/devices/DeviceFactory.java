@@ -15,6 +15,7 @@ public class DeviceFactory implements IDeviceFactory {
 	 * @param carId id of car
 	 * @return 
 	 */
+	@Override
 	public Device createDevice(int deviceId, int carId) {
 		if ( deviceId== speedSensor ) {
 			return new SpeedSensor(deviceId, carId);

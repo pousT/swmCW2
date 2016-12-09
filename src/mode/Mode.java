@@ -85,6 +85,7 @@ public class Mode extends AbstractMode{
 	 * see AbstractMode.java 
 	 *
 	 */
+	@Override
 	public int getAllConsumption() {
 		cdid = connect.getID();
 		int sumConsumption = 0;
@@ -100,6 +101,7 @@ public class Mode extends AbstractMode{
 	 * see AbstractMode.java 
 	 *
 	 */
+	@Override
 	public void checkTemperature(int currentTemperature) {
 		String[] temperature = hashMap.get("temperature");	// 3 args
 		System.out.println(temperature[0]);
@@ -123,6 +125,7 @@ public class Mode extends AbstractMode{
 	 * see AbstractMode.java 
 	 *
 	 */
+	@Override
 	public void checkConsumption() {
 		String[] consumption = hashMap.get("consumption");
 		String[] device = hashMap.get("queue");

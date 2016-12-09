@@ -45,6 +45,7 @@ public class ModeDevice extends Functionality{
  * this sendCommand() is used to read from the Mode.csv file, ignore the first line, get the mode, call the determine the mode
  * 
  */
+	@Override
 	public void sendCommand() {
 		
 		try {

@@ -24,6 +24,7 @@ public class Device implements Observer, Runnable {
 	/**
 	 *  Device information, separated from constructor 
 	 */
+	@Override
 	public String toString() {
 		return "Car " + carId + " Device " + deviceId + " created";
 	}
