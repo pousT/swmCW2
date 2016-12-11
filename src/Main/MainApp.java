@@ -16,6 +16,7 @@ import view.CarOverviewController;
 import car.Car;
 
 import db.ConnectionDB;
+import devices.Device;
 /**
  * This class is the entrance of GUI
  * @author tangshulan
@@ -44,7 +45,7 @@ public class MainApp extends Application {
     public ObservableList<Car> getcarData() {
         return carData;
     }
-    
+
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -96,9 +97,10 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
-/**
- * This method load car record from database
- */
+	/**
+	 * This method load car record from database, moved from previous main method in 
+	 * FileMonitor class
+	 */
     private void loadRecords() {
 		List<String> resultID = db.getID();
 

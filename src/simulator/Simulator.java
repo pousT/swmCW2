@@ -19,6 +19,9 @@ public class Simulator extends Observable {
 		}   	
     	return instance;
 	}
+    /**
+     * change car arraylist to observable list
+     */
     private ObservableList<Car> cars;	
 
 	private String statecommand;
