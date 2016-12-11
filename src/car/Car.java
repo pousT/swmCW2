@@ -4,21 +4,29 @@ import java.util.ArrayList;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import devices.Device;
 import devices.DeviceFactory;
 
 public class Car {
+	/**
+	 * use factory create device
+	 */
     private DeviceFactory deviceFactory; // use device factory to create different devices
 	private IntegerProperty carId;
-	public ArrayList<Device> devices;
 	/**
-	 * 
+	 * changed from array list to observable list
+	 */
+	public ObservableList<Device> devices;
+	/**
+	 * initialize a car, create empty device observable list
 	 * @param carId e.g. 00, 01
 	 * @param factory device factory instance, used to create new device
 	 */
 	public Car(int carId, DeviceFactory factory) {
 		this.carId = new SimpleIntegerProperty(carId);
-		this.setDevices(new ArrayList<Device>());
+		this.setDevices( FXCollections.observableArrayList());
 		this.deviceFactory = factory;
 //		System.out.println("car " + carId + " created");
 	}
@@ -54,11 +62,18 @@ public class Car {
     public IntegerProperty carIdProperty() {
         return carId;
     }
-	public ArrayList<Device> getDevices() {
+    /**
+     * 
+     * @return observable list of device
+     */
+	public ObservableList<Device> getDevices() {
 		return devices;
 	}
-
-	public void setDevices(ArrayList<Device> devices) {
+	/**
+	 * 
+	 * @param devices observable list of device
+	 */
+	public void setDevices(ObservableList<Device> devices) {
 		this.devices = devices;
 	}
 
