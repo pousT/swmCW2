@@ -24,12 +24,15 @@ public class ModeDevice extends Functionality{
 	
 	synchronized public static ModeDevice getInstance() {
 		if(instance == null){
-			instance = new ModeDevice(sim);
+			instance = new ModeDevice(Simulator.getInstance());
 		}   	
     	return instance;
 	}
-	
-	public ModeDevice(Simulator simulator) {
+	/**
+	 *  change constructor to private for singleton pattern
+	 * @param simulator
+	 */
+	private ModeDevice(Simulator simulator) {
 		sim = simulator;
 	}
 	

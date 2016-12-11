@@ -16,7 +16,10 @@ public class CreateDevice extends Functionality{
 	private static Simulator simulator;
     ConnectionDB connect = ConnectionDB.getInstance();
     
-    
+    /**
+     * change constructor to private for singleton pattern
+     * @param simulator
+     */
     public CreateDevice(Simulator simulator){
 	    CreateDevice.simulator = simulator;
     }
@@ -24,7 +27,7 @@ public class CreateDevice extends Functionality{
     private static CreateDevice instance;
     synchronized public static CreateDevice getInstance() {
 		if(instance == null){
-			instance = new CreateDevice(simulator);
+			instance = new CreateDevice(Simulator.getInstance());
 		}   	
 	    	return instance;
 	}

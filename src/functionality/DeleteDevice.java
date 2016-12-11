@@ -15,13 +15,16 @@ public class DeleteDevice extends Functionality{
 	 private static Simulator simulator; 
 	 private static DeleteDevice instance;
 	 ConnectionDB connect = ConnectionDB.getInstance();
-	  
-	 public DeleteDevice(Simulator simulator){
+	/**
+	 *   change constructor to private for singleton pattern
+	 * @param simulator
+	 */
+	 private DeleteDevice(Simulator simulator){
 		 DeleteDevice.simulator = simulator;
 	 }
 	 synchronized public static DeleteDevice getInstance() {
 		if(instance == null){
-			instance = new DeleteDevice(simulator);
+			instance = new DeleteDevice(Simulator.getInstance());
 		}   	
 	    	return instance;
 	 }
