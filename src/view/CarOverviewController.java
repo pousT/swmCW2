@@ -7,6 +7,7 @@ import Main.MainApp;
 import car.Car;
 
 import devices.Device;
+import functionality.DeleteDevice;
 public class CarOverviewController {
 	@FXML
     private TableView<Car> carTable;
@@ -75,6 +76,17 @@ public class CarOverviewController {
     		deviceTypeLabel.setText("");
     	}
     }
+    /**
+     * Called when the user clicks on the delete button.
+     */
+    @FXML
+    private void handleDeleteDevice() {
+    	System.out.println("delete");
+        String cid = carIdLabel.getText();
+        String did = deviceIdLabel.getText();
+        String cmd = cid + "," + did;
+        DeleteDevice.getInstance().sendCommand(cmd);
+    }
 	/**
      * Is called by the main application to give a reference back to itself.
      * 
@@ -82,8 +94,7 @@ public class CarOverviewController {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-
         // Add observable list data to the table
-        carTable.setItems(mainApp.getcarData());
+        carTable.setItems(mainApp.getcarData());        
     }
 }

@@ -28,7 +28,7 @@ public class Mode extends AbstractMode{
 	
 	Simulator simulator;
 	ConnectionDB connect = ConnectionDB.getInstance();
-	ModeDevice modedevice = new ModeDevice(simulator);
+	ModeDevice modedevice = ModeDevice.getInstance();
 	
 	public void putmode() 
 	{
