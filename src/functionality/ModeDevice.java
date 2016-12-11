@@ -84,5 +84,11 @@ public class ModeDevice extends Functionality{
 		    	break;
 		    }
 	    }
+
+@Override
+public void sendCommand(String cmd) {
+	determineMode(cmd);
+	
+}
 		
 }

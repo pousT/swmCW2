@@ -42,4 +42,11 @@ public class DeleteDevice extends Functionality{
 	           e.printStackTrace();
 	       } 
 	   }
+	@Override
+	public void sendCommand(String cmd) {
+ 	   String[] commands = cmd.split(",");
+ 	   simulator.removeDevice(commands[0]+"&"+commands[1]);
+ 	   connect.delete(cmd);
+		
+	}
 }

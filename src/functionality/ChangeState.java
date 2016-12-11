@@ -35,4 +35,12 @@ public class ChangeState extends Functionality{
 	           e.printStackTrace();
 	       } 
 	   }
+
+	@Override
+	public void sendCommand(String cmd) {
+ 	   String[] commands = cmd.split(",");
+ 	   simulator.changeState(commands[0]+"&"+commands[1]+"&"+commands[2]);
+ 	   connect.updateState(commands[0]+"&"+commands[1], commands[2]);
+		
+	}
 }
