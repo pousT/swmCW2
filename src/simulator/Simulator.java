@@ -1,7 +1,13 @@
+package simulator;
 
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
+
+import car.Car;
+import devices.Device;
+import devices.DeviceFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Simulator extends Observable {
 
@@ -13,26 +19,42 @@ public class Simulator extends Observable {
 		}   	
     	return instance;
 	}
-	
-	private ArrayList<Car> cars;
-    private String statecommand;
-    
-	public Simulator() {
-		this.cars = new ArrayList<Car>();
-	}
+    /**
+     * change car arraylist to observable list
+     */
+    private ObservableList<Car> cars;	
 
+	private String statecommand;
+    private DeviceFactory factory; // add device factory
+    /**
+     * create a list new car, and a device factory instance. 
+     * change to private for singleton pattern
+     */
+	public Simulator() {
+		this.cars = FXCollections.observableArrayList();
+		this.factory = new DeviceFactory();
+	}
 	/**
-	 * @param String
-	 *            carId ; eg 00 , 01, 02 This should be called as soon as the
+	 * get observable list of cars
+	 * @return
+	 */
+    public ObservableList<Car> getCars() {
+		return cars;
+	}
+	/**
+	 *  This should be called as soon as the
 	 *            web app decides to make a new car
+	 * @param carId  eg 00 , 01, 02
+	 * @param factory a device factory instance, used to create new device for car
+	 * 
 	 */
 	
     /* The front-end doesn't have a page to add specified car and it only has one page to add devices directly,
      * so I change this method to "private" and it will only be called by "addDevice()";
      */
 	
-	private void addNewCar(int carId) {
-		Car car = new Car(carId);
+	private void addNewCar(int carId, DeviceFactory factory) {
+		Car car = new Car(carId, factory);
 		cars.add(car);
 		System.out.println("Success!");
 	}
@@ -63,7 +85,7 @@ public class Simulator extends Observable {
 			}
 		}
 		if (carExists == false) {              // If the car doesn't exists, create this car and then create the specified device
-			addNewCar(carId);
+			addNewCar(carId, factory);
 			cars.get(cars.size()-1).addNewDevice(deviceId);
 			int length = cars.get(cars.size()-1).devices.size();
 			Device device = cars.get(cars.size()-1).devices.get(length-1);

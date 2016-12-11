@@ -1,9 +1,15 @@
+package functionality;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Timer;
+
+import db.ConnectionDB;
+import mode.ManualMode;
+import mode.Mode;
+import simulator.Simulator;
 
 /**
  * this class is used to determine mode 
@@ -18,12 +24,15 @@ public class ModeDevice extends Functionality{
 	
 	synchronized public static ModeDevice getInstance() {
 		if(instance == null){
-			instance = new ModeDevice(sim);
+			instance = new ModeDevice(Simulator.getInstance());
 		}   	
     	return instance;
 	}
-	
-	public ModeDevice(Simulator simulator) {
+	/**
+	 *  change constructor to private for singleton pattern
+	 * @param simulator
+	 */
+	private ModeDevice(Simulator simulator) {
 		sim = simulator;
 	}
 	
@@ -39,6 +48,7 @@ public class ModeDevice extends Functionality{
  * this sendCommand() is used to read from the Mode.csv file, ignore the first line, get the mode, call the determine the mode
  * 
  */
+	@Override
 	public void sendCommand() {
 		
 		try {
@@ -77,5 +87,11 @@ public class ModeDevice extends Functionality{
 		    	break;
 		    }
 	    }
+
+@Override
+public void sendCommand(String cmd) {
+	determineMode(cmd);
+	
+}
 		
 }

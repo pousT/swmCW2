@@ -1,3 +1,4 @@
+package mode;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,6 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import db.ConnectionDB;
+import functionality.ModeDevice;
+import simulator.Simulator;
 
 /**
  * This class is used to implement the auto mode.
@@ -23,7 +28,7 @@ public class Mode extends AbstractMode{
 	
 	Simulator simulator;
 	ConnectionDB connect = ConnectionDB.getInstance();
-	ModeDevice modedevice = new ModeDevice(simulator);
+	ModeDevice modedevice = ModeDevice.getInstance();
 	
 	public void putmode() 
 	{
@@ -80,6 +85,7 @@ public class Mode extends AbstractMode{
 	 * see AbstractMode.java 
 	 *
 	 */
+	@Override
 	public int getAllConsumption() {
 		cdid = connect.getID();
 		int sumConsumption = 0;
@@ -95,6 +101,7 @@ public class Mode extends AbstractMode{
 	 * see AbstractMode.java 
 	 *
 	 */
+	@Override
 	public void checkTemperature(int currentTemperature) {
 		String[] temperature = hashMap.get("temperature");	// 3 args
 		System.out.println(temperature[0]);
@@ -118,6 +125,7 @@ public class Mode extends AbstractMode{
 	 * see AbstractMode.java 
 	 *
 	 */
+	@Override
 	public void checkConsumption() {
 		String[] consumption = hashMap.get("consumption");
 		String[] device = hashMap.get("queue");

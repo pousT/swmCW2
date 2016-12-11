@@ -1,9 +1,13 @@
+package mode;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import db.ConnectionDB;
+import functionality.ModeDevice;
+import simulator.Simulator;
 
 /**
  * this class is used to implement the User mode.
@@ -16,7 +20,7 @@ public class ManualMode extends AbstractMode {
 	List<String> cdid = new ArrayList<String>();
 	ConnectionDB connect = ConnectionDB.getInstance();
 	private static final String cpath = "./InputCommand/Create.csv";
-	ModeDevice modedevice = new ModeDevice(simulator);
+	ModeDevice modedevice = ModeDevice.getInstance();
 	
 	public ManualMode(Simulator sim) {
 		// TODO Auto-generated constructor stub
