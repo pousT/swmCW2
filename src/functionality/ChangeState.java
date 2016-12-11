@@ -11,13 +11,26 @@ import simulator.Simulator;
  * 
  */
 public class ChangeState extends Functionality{
-	private Simulator simulator;
-	ConnectionDB connect = ConnectionDB.getInstance();
-	
-	   public ChangeState(Simulator simulator){
+		private Simulator simulator;
+		ConnectionDB connect = ConnectionDB.getInstance();
+	    private static ChangeState instance;
+       /**
+        * change constructor to private for singleton pattern
+        * @param simulator
+        */
+	   private ChangeState(Simulator simulator){
 		   this.simulator = simulator;
 	   }
-	   
+	   /**
+	    * get ChangeState instance method  
+	    * @return
+	    */
+	   synchronized public static ChangeState getInstance() {
+			if(instance == null){
+				instance = new ChangeState(Simulator.getInstance());
+			}   	
+		    	return instance;
+		 }	   
 	   @Override
 	public void sendCommand(){
 		   BufferedReader reader = null;
@@ -35,4 +48,13 @@ public class ChangeState extends Functionality{
 	           e.printStackTrace();
 	       } 
 	   }
+
+	@Override
+	public void sendCommand(String cmd) {
+ 	   String[] commands = cmd.split(",");
+ 	   simulator.changeState(commands[0]+"&"+commands[1]+"&"+commands[2]);
+ 	   connect.updateState(commands[0]+"&"+commands[1], commands[2]);
+		
+	}
+
 }

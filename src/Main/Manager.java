@@ -1,3 +1,4 @@
+package Main;
 
 import java.util.HashMap;
 
@@ -24,10 +25,10 @@ public class Manager {
 	public Manager(Simulator sim) {
 		// TODO Auto-generated constructor stub
 		simulator = sim;		
-		hashmap.put("Create.csv", new CreateDevice(simulator));
-		hashmap.put("Delete.csv", new DeleteDevice(simulator));
-		hashmap.put("ChangeState.csv", new ChangeState(simulator));
-		hashmap.put("Mode.csv", new ModeDevice(simulator));
+		hashmap.put("Create.csv", CreateDevice.getInstance());
+		hashmap.put("Delete.csv", DeleteDevice.getInstance());
+		hashmap.put("ChangeState.csv", ChangeState.getInstance());
+		hashmap.put("Mode.csv", ModeDevice.getInstance());
 	}
 	
 	/**

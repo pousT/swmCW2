@@ -27,7 +27,8 @@ public class Simulator extends Observable {
 	private String statecommand;
     private DeviceFactory factory; // add device factory
     /**
-     * create a list new car, and a device factory instance
+     * create a list new car, and a device factory instance. 
+     * change to private for singleton pattern
      */
 	public Simulator() {
 		this.cars = FXCollections.observableArrayList();

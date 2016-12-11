@@ -30,7 +30,7 @@ public class MainApp extends Application {
     private Simulator sim;
     private ConnectionDB db;
     /**
-     * initialize simulator, database instance and car list
+     * initialize simulator, database instance, manager and car list
      */
     public MainApp() {
     	sim = Simulator.getInstance();

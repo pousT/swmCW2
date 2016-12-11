@@ -16,7 +16,10 @@ public class CreateDevice extends Functionality{
 	private static Simulator simulator;
     ConnectionDB connect = ConnectionDB.getInstance();
     
-    
+    /**
+     * change constructor to private for singleton pattern
+     * @param simulator
+     */
     public CreateDevice(Simulator simulator){
 	    CreateDevice.simulator = simulator;
     }
@@ -24,7 +27,7 @@ public class CreateDevice extends Functionality{
     private static CreateDevice instance;
     synchronized public static CreateDevice getInstance() {
 		if(instance == null){
-			instance = new CreateDevice(simulator);
+			instance = new CreateDevice(Simulator.getInstance());
 		}   	
 	    	return instance;
 	}
@@ -58,4 +61,17 @@ public class CreateDevice extends Functionality{
             e.printStackTrace();
         } 
     }
+
+
+	@Override
+	public void sendCommand(String cmd) {
+		String data = null;
+		String[] commands = cmd.split(",");
+		simulator.addDevice(commands[0]+"&"+commands[1]+"&"+commands[2]+"&"+commands[3]);
+		int state = simulator.getState(commands[0]+"&"+commands[1]);
+    	data = commands[0]+","+commands[1]+","+state+","+"00";
+    	connect.insert(data);   	       
+	}
+
+    
 }

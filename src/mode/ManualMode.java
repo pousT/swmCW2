@@ -20,7 +20,7 @@ public class ManualMode extends AbstractMode {
 	List<String> cdid = new ArrayList<String>();
 	ConnectionDB connect = ConnectionDB.getInstance();
 	private static final String cpath = "./InputCommand/Create.csv";
-	ModeDevice modedevice = new ModeDevice(simulator);
+	ModeDevice modedevice = ModeDevice.getInstance();
 	
 	public ManualMode(Simulator sim) {
 		// TODO Auto-generated constructor stub

@@ -5,4 +5,9 @@ package functionality;
  */
 public abstract class Functionality {
 	abstract public void sendCommand();
+	/**
+	 * get user command directly from gui
+	 */
+	abstract public void sendCommand(String cmd);
 }
+ 
