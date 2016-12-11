@@ -9,6 +9,7 @@ public class PositionSensor extends Device {
 	public PositionSensor(int deviceId, int carId) {
 		super(deviceId, carId);
 		this.setPower(500);
+		setDeviceType("Position Sensor");
 		// TODO Auto-generated constructor stub
 	}
 	@Override

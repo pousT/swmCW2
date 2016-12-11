@@ -9,6 +9,7 @@ public class LidarSensor extends Device {
 	public LidarSensor(int deviceId, int carId) {
 		super(deviceId, carId);
 		setPower(300);
+		setDeviceType("Lidar Sensor");
 		// TODO Auto-generated constructor stub
 	}
 	@Override
