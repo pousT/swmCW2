@@ -1,12 +1,13 @@
 package simulator;
 
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
 
 import car.Car;
 import devices.Device;
 import devices.DeviceFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Simulator extends Observable {
 
@@ -18,18 +19,28 @@ public class Simulator extends Observable {
 		}   	
     	return instance;
 	}
-	
-	private ArrayList<Car> cars;
-    private String statecommand;
+    /**
+     * change car arraylist to observable list
+     */
+    private ObservableList<Car> cars;	
+
+	private String statecommand;
     private DeviceFactory factory; // add device factory
     /**
-     * create a list new car, and a device factory instance
+     * create a list new car, and a device factory instance. 
+     * change to private for singleton pattern
      */
 	public Simulator() {
-		this.cars = new ArrayList<Car>();
+		this.cars = FXCollections.observableArrayList();
 		this.factory = new DeviceFactory();
 	}
-
+	/**
+	 * get observable list of cars
+	 * @return
+	 */
+    public ObservableList<Car> getCars() {
+		return cars;
+	}
 	/**
 	 *  This should be called as soon as the
 	 *            web app decides to make a new car

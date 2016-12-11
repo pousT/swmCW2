@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 
 
 /**
@@ -47,7 +46,7 @@ public class ConnectionDB {
     public void ChangeMaxConnection() {
     	conn = getConnection();
     	try {
-			st = (Statement) conn.createStatement();
+			st = conn.createStatement();
 	        st.executeQuery(max_connection);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -84,7 +83,7 @@ public class ConnectionDB {
     	
     	try{
         	String ssql = "SELECT STATE FROM CurrentDevice WHERE (DID = '"+did+"')";
-        	st = (Statement) conn.createStatement();
+        	st = conn.createStatement();
             ResultSet rs = st.executeQuery(ssql);         
 
             while(rs.next()) {
@@ -116,7 +115,7 @@ public class ConnectionDB {
     	String[] cdids = cdid.split("&");
     	try{
         	String ssql = "SELECT STATE FROM CurrentDevice WHERE (CID = '"+cdids[0]+"') AND (DID = '"+cdids[1]+"')";
-        	st = (Statement) conn.createStatement();
+        	st = conn.createStatement();
             ResultSet rs = st.executeQuery(ssql);    
             
             while(rs.next()) {
@@ -148,7 +147,7 @@ public class ConnectionDB {
     	
         try{
         	String ssql = "SELECT CID, DID FROM CurrentDevice WHERE (STATE = 0)";
-        	st = (Statement) conn.createStatement();
+        	st = conn.createStatement();
             ResultSet rs = st.executeQuery(ssql);         
 
             while(rs.next()) {
@@ -169,7 +168,7 @@ public class ConnectionDB {
     	List<String> didsList = new ArrayList<String>();
         try{
         	String ssql = "SELECT CID, DID, STATE FROM CurrentDevice WHERE (DID = '"+did+"')";
-        	st = (Statement) conn.createStatement();
+        	st = conn.createStatement();
             ResultSet rs = st.executeQuery(ssql);         
 
             while(rs.next()) {
@@ -197,7 +196,7 @@ public class ConnectionDB {
     	String ssql[] = id.split("&");
     	String sql = "SELECT * FROM CurrentDevice WHERE (CID = '"+ssql[0]+"') AND (DID = '"+ssql[1]+"')";
     	try {
-			st = (Statement) conn.createStatement();
+			st = conn.createStatement();
 	        ResultSet rs = st.executeQuery(sql);
 	        
 	        while(rs.next()) {
@@ -227,7 +226,7 @@ public class ConnectionDB {
     	
         try{
         	String ssql = "SELECT CID, DID FROM currentdevice";
-        	st = (Statement) conn.createStatement();
+        	st = conn.createStatement();
             ResultSet rs = st.executeQuery(ssql);         
 
             while(rs.next()) {
@@ -251,7 +250,7 @@ public class ConnectionDB {
     	
         try{
         	String ssql = "SELECT STATE FROM CurrentDevice WHERE CID = ('"+sql[0]+"') AND DID = ('"+sql[1]+"')";
-        	st = (Statement) conn.createStatement();
+        	st = conn.createStatement();
             ResultSet rs = st.executeQuery(ssql);         
 
             while(rs.next()) {
@@ -279,7 +278,7 @@ public class ConnectionDB {
     	
         try{
         	String ssql = "SELECT DVALUE FROM CurrentDevice WHERE (CID='"+id[0]+"') AND (DID='"+id[1]+"')";
-        	st = (Statement) conn.createStatement();
+        	st = conn.createStatement();
             ResultSet rs = st.executeQuery(ssql);         
 
             while(rs.next()) {
@@ -303,7 +302,7 @@ public class ConnectionDB {
         	String sql = "INSERT INTO History(SDVALUE)"    
 	        			+ " VALUES ('"+sum+"')";
 	                    
-	        st = (Statement) conn.createStatement();
+	        st = conn.createStatement();
             st.executeUpdate(sql); 	   
 	                        
             st.close();
@@ -323,7 +322,7 @@ public class ConnectionDB {
     	String sql = "UPDATE CurrentDevice SET STATE = '1'";
     	
         try {
-        	st = (Statement) conn.createStatement();
+        	st = conn.createStatement();
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -338,7 +337,7 @@ public class ConnectionDB {
         
         try {
         	String ssql = "SELECT * FROM CurrentDevice WHERE (CID='"+linedata[0]+"') AND (DID='"+linedata[1]+"')";
-        	st = (Statement) conn.createStatement();
+        	st = conn.createStatement();
             ResultSet rs = st.executeQuery(ssql);
             int counter = 0;
             	
@@ -351,7 +350,7 @@ public class ConnectionDB {
 	            String sql = "INSERT INTO CurrentDevice(CID, DID, STATE, TIMEV)"    
 	                        + " VALUES ('"+linedata[0]+"','"+linedata[1]+"','"+state+"','"+date+"')";   
 	            System.out.println("sql="+sql);  	                    
-	            st = (Statement) conn.createStatement();						  
+	            st = conn.createStatement();						  
 	            int count = st.executeUpdate(sql);    	                        
 	            System.out.println("insert into CurrentDevice " + count + " numbers of data");   
 	                        
@@ -382,7 +381,7 @@ public class ConnectionDB {
         
         try {
         	String ssql = "SELECT * FROM CurrentDevice WHERE (CID='"+linedata[0]+"') AND (DID='"+linedata[1]+"')";
-        	st = (Statement) conn.createStatement();
+        	st = conn.createStatement();
             ResultSet rs = st.executeQuery(ssql);
             int counter = 0;
             	
@@ -397,7 +396,7 @@ public class ConnectionDB {
 	                        + " VALUES ('"+linedata[0]+"','"+linedata[1]+"','"+linedata[2]+"','"+linedata[3]+"','"+date+"')";   
 	            System.out.println("sql="+sql);  
 	                    
-	            st = (Statement) conn.createStatement();
+	            st = conn.createStatement();
 						  
 	            int count = st.executeUpdate(sql);
 	                        
@@ -433,7 +432,7 @@ public class ConnectionDB {
 	        	String sql = "DELETE FROM CurrentDevice"
 	        				 +" WHERE (CID="+linedata[0]+")"+"AND (DID="+linedata[1]+")";
 	        
-	        	st = (Statement) conn.createStatement();
+	        	st = conn.createStatement();
 			
 	        	int count = st.executeUpdate(sql);
 	        	
@@ -462,7 +461,7 @@ public class ConnectionDB {
 				
 	        	String sql = "UPDATE CurrentDevice SET DVALUE = '"+sum+"' WHERE (CID= '"+linedata[0]+"')"+"AND (DID= '"+linedata[1]+"')";
 	        
-	        	st = (Statement) conn.createStatement();
+	        	st = conn.createStatement();
 			
 	        	int count = st.executeUpdate(sql);
 	        	
@@ -488,7 +487,7 @@ public class ConnectionDB {
         
         try {
         	String ssql = "SELECT * FROM CurrentDevice WHERE (CID='"+linedata[0]+"') AND (DID='"+linedata[1]+"')";
-        	st = (Statement) conn.createStatement();
+        	st = conn.createStatement();
             ResultSet rs = st.executeQuery(ssql);
             int counter = 0;        	
             while(rs.next()) {
@@ -498,7 +497,7 @@ public class ConnectionDB {
 				
 	        	String sql = "UPDATE CurrentDevice SET STATE = '"+state+"' WHERE (CID='"+linedata[0]+"')"+"AND (DID='"+linedata[1]+"')";
 	        
-	        	st = (Statement) conn.createStatement();
+	        	st = conn.createStatement();
 			
 	        	int count = st.executeUpdate(sql);
 	        	
@@ -528,7 +527,7 @@ public class ConnectionDB {
         
         try {
         	String ssql = "SELECT HOUR_"+hour+" FROM CurrentDevice WHERE (CID='"+linedata[0]+"') AND (DID='"+linedata[1]+"')";
-        	st = (Statement) conn.createStatement();
+        	st = conn.createStatement();
             ResultSet rs = st.executeQuery(ssql);
             int counter = 0;
             	
@@ -542,7 +541,7 @@ public class ConnectionDB {
 	                        + " VALUES ('"+linedata[0]+"','"+linedata[1]+"','"+linedata[2]+"','"+linedata[3]+"','"+date+"','"+"')";   
 	            System.out.println("sql="+sql);  
 	                    
-	            st = (Statement) conn.createStatement();
+	            st = conn.createStatement();
 						  
 	            int count = st.executeUpdate(sql);    
 	                        
@@ -576,7 +575,7 @@ public class ConnectionDB {
         
         try {				
 	        String sql = "UPDATE CurrentDevice SET HOUR_"+hour+"='"+sum+"' WHERE (CID='"+linedata[0]+"')"+"AND (DID='"+linedata[1]+"')";	     
-	      	st = (Statement) conn.createStatement();			
+	      	st = conn.createStatement();			
 	       	int count = st.executeUpdate(sql);    	
 	        System.out.println("update from CurrentDevice " + count + " numbers of data");   
 	            
@@ -598,7 +597,7 @@ public class ConnectionDB {
     	try {
     		for(int i=0; i<12; i++) {
     			String ssql = "SELECT HOUR_"+(i+1)+" FROM CurrentDevice WHERE (CID='"+linedata[0]+"') AND (DID='"+linedata[1]+"')";
-				st = (Statement) conn.createStatement();
+				st = conn.createStatement();
 				ResultSet rs = st.executeQuery(ssql);
 				while(rs.next()){
 					counter+=Integer.parseInt(
@@ -620,7 +619,7 @@ public class ConnectionDB {
     	conn = getConnection(); 
         try {
         	String ssql = "SELECT CID, DID FROM CurrentDevice WHERE (DID='"+did+"')";
-        	st = (Statement) conn.createStatement();
+        	st = conn.createStatement();
             ResultSet rs = st.executeQuery(ssql);
             int counter = 0;          	
             while(rs.next()) {
@@ -630,7 +629,7 @@ public class ConnectionDB {
             } 
        			if(counter !=0 ) { // if have data				
 	        	String sql = "UPDATE CurrentDevice SET STATE = '"+state+"' WHERE (DID= '"+did+"')";	        
-	        	st = (Statement) conn.createStatement();			
+	        	st = conn.createStatement();			
 	        	int count = st.executeUpdate(sql);	        	
 	        	System.out.println("update from CurrentDevice " + count + " numbers of data");   
 	            

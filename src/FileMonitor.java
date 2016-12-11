@@ -7,9 +7,8 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.sql.SQLException;
-import java.util.List;
 
-import db.ConnectionDB;
+import Main.Manager;
 import simulator.Simulator;
 
 /**
@@ -22,16 +21,7 @@ public class FileMonitor {
 
 	public static void main(String[] args) throws SQLException {
 		
-		List<String> resultID = ConnectionDB.getInstance().getID();
-		
 		Manager manager = new Manager(Simulator.getInstance());
-		if(ConnectionDB.getInstance().getID().size()!=0) {
-			for(int i=0; i<resultID.size(); i++) {
-				Simulator.getInstance().addDevice(resultID.get(i)+"&"+
-												  ConnectionDB.getInstance().getState(resultID.get(i))+"&"+
-											      ConnectionDB.getInstance().getValue(resultID.get(i)));
-			}
-		}
 		
 		try {
 			WatchService watchService = FileSystems.getDefault().newWatchService();
@@ -39,7 +29,7 @@ public class FileMonitor {
 		        StandardWatchEventKinds.ENTRY_CREATE,  
 		        StandardWatchEventKinds.ENTRY_DELETE,  
 		        StandardWatchEventKinds.ENTRY_MODIFY);
-			
+
 	        while (true) {  
 	            WatchKey key = watchService.take();
 	            for ( WatchEvent<?> event:key.pollEvents()) { 

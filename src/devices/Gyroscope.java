@@ -9,7 +9,7 @@ public class Gyroscope extends Device {
 	public Gyroscope(int deviceId, int carId) {
 		super(deviceId, carId);
 		setPower(150);
-		// TODO Auto-generated constructor stub
+		setDeviceType("Gyroscope");
 	}
 	@Override
 	public String toString() {

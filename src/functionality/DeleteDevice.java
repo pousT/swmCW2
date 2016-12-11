@@ -15,18 +15,22 @@ public class DeleteDevice extends Functionality{
 	 private static Simulator simulator; 
 	 private static DeleteDevice instance;
 	 ConnectionDB connect = ConnectionDB.getInstance();
-	  
-	 public DeleteDevice(Simulator simulator){
-		 this.simulator = simulator;
+	/**
+	 *   change constructor to private for singleton pattern
+	 * @param simulator
+	 */
+	 private DeleteDevice(Simulator simulator){
+		 DeleteDevice.simulator = simulator;
 	 }
 	 synchronized public static DeleteDevice getInstance() {
 		if(instance == null){
-			instance = new DeleteDevice(simulator);
+			instance = new DeleteDevice(Simulator.getInstance());
 		}   	
 	    	return instance;
 	 }
 	   
-	   public void sendCommand(){
+	   @Override
+	public void sendCommand(){
 		   BufferedReader reader = null;
 	       try {
 	           reader = new BufferedReader(new FileReader("./InputCommand/Delete.csv"));
@@ -41,4 +45,11 @@ public class DeleteDevice extends Functionality{
 	           e.printStackTrace();
 	       } 
 	   }
+	@Override
+	public void sendCommand(String cmd) {
+ 	   String[] commands = cmd.split(",");
+ 	   simulator.removeDevice(commands[0]+"&"+commands[1]);
+ 	   connect.delete(cmd);
+		
+	}
 }

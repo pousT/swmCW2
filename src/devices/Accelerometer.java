@@ -9,7 +9,7 @@ public class Accelerometer extends Device {
 	public Accelerometer(int deviceId, int carId) {
 		super(deviceId, carId);
 		setPower(1200);
-		// TODO Auto-generated constructor stub
+		setDeviceType("Accelerometer");
 	}
 @Override
 public String toString() {

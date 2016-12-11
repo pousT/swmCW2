@@ -9,7 +9,7 @@ public class SpeedSensor extends Device {
 	public SpeedSensor(int deviceId, int carId) {
 		super(deviceId, carId);
 		setPower(300);
-		// TODO Auto-generated constructor stub
+		setDeviceType("Speed Sensor");		
 	}
 	@Override
 	public String toString() {
