@@ -3,7 +3,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import Main.MainApp;
+import main.MainApp;
 import car.Car;
 
 import devices.Device;
@@ -58,12 +58,21 @@ public class CarOverviewController {
     				(observable, oldValue, newValue) -> showDeviceDetails(newValue));
         }
 	}
+    /**
+     * Show details of a selected device
+     * @param device
+     */
     private void showDeviceDetails(Device device) {
     	if (device != null) {
+    		if(device.getState() == 0) {
+    			stateLabel.setText("OFF");
+    		}
+    		else {
+    			stateLabel.setText("ON");
+    		}
     		// Fill the labels with info from the person object.
     		deviceIdLabel.setText(Integer.toString(device.getDeviceId()));
     		carIdLabel.setText(Integer.toString(device.getCarId()));
-    		stateLabel.setText(Integer.toString(device.getState()));
     		powerLabel.setText(Integer.toString(device.getPower()));
     		deviceTypeLabel.setText(device.getDeviceType());
     		
@@ -81,7 +90,16 @@ public class CarOverviewController {
      */
     @FXML
     private void handleDeleteDevice() {
-    	System.out.println("delete");
+        String cid = carIdLabel.getText();
+        String did = deviceIdLabel.getText();
+        String cmd = cid + "," + did;
+        DeleteDevice.getInstance().sendCommand(cmd);
+    }
+    /**
+     * Called when the user clicks on the new button.
+     */
+    @FXML
+    private void handleNewDevice() {
         String cid = carIdLabel.getText();
         String did = deviceIdLabel.getText();
         String cmd = cid + "," + did;
