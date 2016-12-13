@@ -1,5 +1,5 @@
 package devices;
 
 public interface IDeviceFactory {
-	public Device createDevice(int deviceId, int carId);
+	public Device createDevice(int deviceId, int carId, int state);
 }

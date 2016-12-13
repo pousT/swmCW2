@@ -6,8 +6,8 @@ public class Gyroscope extends Device {
  * @param deviceId id of device
  * @param carId id of car
  */
-	public Gyroscope(int deviceId, int carId) {
-		super(deviceId, carId);
+	public Gyroscope(int deviceId, int carId, int state) {
+		super(deviceId, carId, state);
 		setPower(150);
 		setDeviceType("Gyroscope");
 	}

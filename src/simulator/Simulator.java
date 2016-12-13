@@ -72,12 +72,13 @@ public class Simulator extends Observable {
 		String[] splitIdentifier = deviceIdentifier.split("&");
 		int carId = Integer.parseInt(splitIdentifier[0]);
 		int deviceId = Integer.parseInt(splitIdentifier[1]);
+		int state = Integer.parseInt(splitIdentifier[2]);
         Boolean carExists = false;
         System.out.println("Success!!");
         
 		for (int i = 0; i < cars.size(); i++) {
 			if (cars.get(i).getCarId() == carId) {
-				cars.get(i).addNewDevice(deviceId);
+				cars.get(i).addNewDevice(deviceId,state);
 				int length = cars.get(i).devices.size();
 				Device device = cars.get(i).devices.get(length-1);
 				this.addObserver(device);    // When the device is created, it will be added as a observer.
@@ -86,7 +87,7 @@ public class Simulator extends Observable {
 		}
 		if (carExists == false) {              // If the car doesn't exists, create this car and then create the specified device
 			addNewCar(carId, factory);
-			cars.get(cars.size()-1).addNewDevice(deviceId);
+			cars.get(cars.size()-1).addNewDevice(deviceId,state);
 			int length = cars.get(cars.size()-1).devices.size();
 			Device device = cars.get(cars.size()-1).devices.get(length-1);
 			this.addObserver(device);
@@ -163,7 +164,7 @@ public class Simulator extends Observable {
 		String[] splitData = dataRequest.split("&");
 		int carId = Integer.parseInt(splitData[0]);
 		int deviceId = Integer.parseInt(splitData[1]);
-		
+
 		for (int i = 0; i < cars.size(); i++) {
 			if (cars.get(i).getCarId() == carId) {
 				for (int j = 0; j < cars.get(i).devices.size(); j++) {

@@ -6,8 +6,8 @@ public class PositionSensor extends Device {
 	 * @param deviceId id of device
 	 * @param carId id of car
 	 */
-	public PositionSensor(int deviceId, int carId) {
-		super(deviceId, carId);
+	public PositionSensor(int deviceId, int carId, int state) {
+		super(deviceId, carId, state);
 		this.setPower(500);
 		setDeviceType("Position Sensor");
 		// TODO Auto-generated constructor stub
