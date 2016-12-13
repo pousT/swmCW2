@@ -68,7 +68,7 @@ public class Simulator extends Observable {
 	 */
 
 	public void addDevice(String deviceIdentifier) {
-
+        System.out.println(deviceIdentifier);		
 		String[] splitIdentifier = deviceIdentifier.split("&");
 		int carId = Integer.parseInt(splitIdentifier[0]);
 		int deviceId = Integer.parseInt(splitIdentifier[1]);

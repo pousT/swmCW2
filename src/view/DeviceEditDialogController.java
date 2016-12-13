@@ -6,8 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableView;
+
 import javafx.scene.Group;
 public class DeviceEditDialogController {
 
@@ -27,6 +26,7 @@ public class DeviceEditDialogController {
     private Stage dialogStage;
     private Device device;
     private boolean okClicked = false;
+	private Car car;
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -43,19 +43,32 @@ public class DeviceEditDialogController {
         this.dialogStage = dialogStage;
     }
     /**
-     * Sets the person to be edited in the dialog.
+     * Sets the device to be edited in the dialog.
      * 
-     * @param person
+     * @param device
      */
     public void setDevice(Device device) {
         this.device = device;
 
         carIdField.setText(Integer.toString(device.getCarId()));
         deviceIdField.setText(Integer.toString(device.getDeviceId()));
-        stateField.
     }
-	public DeviceEditDialogController() {
-		// TODO Auto-generated constructor stub
+
+    /**
+     * Returns true if the user clicked OK, false otherwise.
+     * 
+     * @return
+     */
+    public boolean isOkClicked() {
+        return okClicked;
+    }
+    /**
+     * 
+     * @param car
+     */
+	public void setCar(Car car) {
+		this.car = car;
+		
 	}
 
 }

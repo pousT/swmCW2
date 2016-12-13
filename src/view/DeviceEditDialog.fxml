@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -28,16 +29,17 @@
             <Label text="Car ID" />
             <Label text="Device Type" GridPane.rowIndex="2" />
             <Label text="Power" GridPane.rowIndex="3" />
-            <Label fx:id="carIdLabel2" GridPane.columnIndex="1" />
             <Label text="State" GridPane.rowIndex="4" />
             <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <buttons>
-                  <RadioButton fx:id="state" mnemonicParsing="false" text="OFF" />
+                  <RadioButton fx:id="offButton" mnemonicParsing="false" text="OFF" />
                   <RadioButton fx:id="state" mnemonicParsing="false" text="ON" />
                </buttons>
             </ButtonBar>
             <Label text="Device ID" GridPane.rowIndex="1" />
-            <Label fx:id="carIdLabel" text="Label" GridPane.columnIndex="1" />
+            <Label fx:id="carIdLabel" GridPane.columnIndex="1" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="carIdField" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <ButtonBar layoutX="153.0" layoutY="216.0" prefHeight="40.0" prefWidth="200.0">

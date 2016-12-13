@@ -5,8 +5,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import main.MainApp;
 import car.Car;
-
 import devices.Device;
+import functionality.CreateDevice;
 import functionality.DeleteDevice;
 public class CarOverviewController {
 	@FXML
@@ -100,10 +100,10 @@ public class CarOverviewController {
      */
     @FXML
     private void handleNewDevice() {
-        String cid = carIdLabel.getText();
-        String did = deviceIdLabel.getText();
-        String cmd = cid + "," + did;
-        DeleteDevice.getInstance().sendCommand(cmd);
+		boolean okClicked = mainApp.showDevicenNewDialog(carIdLabel.getText());
+		if (okClicked) {
+			
+		}
     }
 	/**
      * Is called by the main application to give a reference back to itself.
