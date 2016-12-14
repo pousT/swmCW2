@@ -17,13 +17,14 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <SplitPane dividerPositions="0.21212121212121213" layoutX="56.0" layoutY="59.0" prefHeight="295.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.4595959595959596" layoutX="56.0" layoutY="59.0" prefHeight="295.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <TableView fx:id="deviceTable" layoutX="-71.0" layoutY="22.0" prefHeight="293.0" prefWidth="80.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView layoutX="-11.0" layoutY="22.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn fx:id="deviceIdColumn" prefWidth="75.0" text="DeviceID" />
+                                  <TableColumn prefWidth="75.0" text="Property" />
+                                  <TableColumn prefWidth="75.0" text="Value" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -58,12 +59,11 @@
                                     <Label fx:id="powerLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                  </children>
                               </GridPane>
-                              <ButtonBar layoutX="94.0" layoutY="214.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="5.0">
-                                <buttons>
-                                  <Button mnemonicParsing="false" text="New" />
-                                    <Button mnemonicParsing="false" text="Update" />
+                              <ButtonBar layoutX="94.0" layoutY="234.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                                 <buttons>
                                     <Button mnemonicParsing="false" onAction="#handleDeleteDevice" text="Delete" />
-                                </buttons>
+                                    <Button fx:id="switchButton" mnemonicParsing="false" onAction="#handleChangeState" />
+                                 </buttons>
                               </ButtonBar>
                            </children>
                         </AnchorPane>
@@ -73,14 +73,39 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="carTable" prefHeight="295.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columns>
-                      <TableColumn fx:id="carIdColumn" prefWidth="75.0" text="CarID" />
-                    </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
+                  <SplitPane dividerPositions="0.29797979797979796" layoutX="177.0" layoutY="34.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <TableView fx:id="carTable" prefHeight="295.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn fx:id="carIdColumn" prefWidth="75.0" text="CarID" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <TableView fx:id="deviceTable" prefHeight="293.0" prefWidth="80.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn fx:id="deviceIdColumn" prefWidth="75.0" text="DeviceID" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+                  <ButtonBar prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="5.0">
+                    <buttons>
+                      <Button mnemonicParsing="false" onAction="#handleNewDevice" text="New Device" />
+                    </buttons>
+                  </ButtonBar>
                </children>
             </AnchorPane>
         </items>

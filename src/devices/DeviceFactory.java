@@ -13,22 +13,23 @@ public class DeviceFactory implements IDeviceFactory {
 	 * @author tangshulan
 	 * @param deviceId id of device
 	 * @param carId id of car
+	 * @state device state
 	 * @return 
 	 */
 	@Override
-	public Device createDevice(int deviceId, int carId) {
+	public Device createDevice(int deviceId, int carId, int state) {
 		if ( deviceId== speedSensor ) {
-			return new SpeedSensor(deviceId, carId);
+			return new SpeedSensor(deviceId, carId, state);
 		} else if ( deviceId == lidarSensor ) {
-			return new LidarSensor(deviceId, carId);
+			return new LidarSensor(deviceId, carId, state);
 		} else if ( deviceId == positionSensor ) {
-			return new PositionSensor(deviceId, carId);
+			return new PositionSensor(deviceId, carId, state);
 		} else if (deviceId == accelerometer) {
-			return new Accelerometer(deviceId, carId);
+			return new Accelerometer(deviceId, carId, state);
 		} else if (deviceId == gyroscope) {
-			return new Gyroscope(deviceId, carId);
+			return new Gyroscope(deviceId, carId, state);
 		} else {
-			return new Device(deviceId, carId); // other specified device
+			return new Device(deviceId, carId, state); // other specified device
 		}
 			
 	}

@@ -10,9 +10,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import simulator.Simulator;
 import view.CarOverviewController;
+import view.DeviceEditDialogController;
 import car.Car;
 
 import db.ConnectionDB;
@@ -30,7 +32,7 @@ public class MainApp extends Application {
     private Simulator sim;
     private ConnectionDB db;
     /**
-     * initialize simulator, database instance, manager and car list
+     * initialize simulator, database instance and car list
      */
     public MainApp() {
     	sim = Simulator.getInstance();
@@ -98,6 +100,45 @@ public class MainApp extends Application {
         }
     }
 	/**
+	 * Opens a dialog to add new device for the specified car. If the user
+	 * clicks OK, the device is created and true
+	 * is returned.
+	 * 
+	 * @param car the car object to add device 
+	 * @return true if the user clicked OK, false otherwise.
+	 */
+	public boolean showDevicenNewDialog() {
+		try {
+			// Load the fxml file and create a new stage for the popup dialog.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("../view/DeviceEditDialog.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			// Create the dialog Stage.
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("New Device");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			// Set the car into the controller.
+			DeviceEditDialogController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+			controller.setMainApp(this);
+			controller.setCarIdBox();
+			controller.setRadioButton();
+			
+			// Show the dialog and wait until the user closes it
+			dialogStage.showAndWait();
+
+			return controller.isOkClicked();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	/**
 	 * This method load car record from database, moved from previous main method in 
 	 * FileMonitor class
 	 */
@@ -107,7 +148,7 @@ public class MainApp extends Application {
 		if(db.getID().size()!=0) {
 			for(int i=0; i<resultID.size(); i++) {
 				sim.addDevice(resultID.get(i)+"&"+
-												  db.getState(resultID.get(i))+"&"+
+												  db.getState(resultID.get(i)).get(0)+"&"+
 											      db.getValue(resultID.get(i)));
 			}
 		}    	

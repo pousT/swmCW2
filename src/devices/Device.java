@@ -22,11 +22,12 @@ public class Device implements Observer, Runnable {
  * create a specified device, set power to 100
  * @param deviceId id of device
  * @param carId id of car
+ * @param state device state 
  */
-	public Device(int deviceId, int carId) {
+	public Device(int deviceId, int carId, int state) {
 		this.deviceId=new SimpleIntegerProperty(deviceId);
 		this.carId = new SimpleIntegerProperty(carId);
-		this.state = new SimpleIntegerProperty(0);
+		this.state = new SimpleIntegerProperty(state);
 		this.power = new SimpleIntegerProperty(100);
 		this.deviceType = new SimpleStringProperty("Device");
 		System.out.println(this.toString());

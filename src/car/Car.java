@@ -33,10 +33,11 @@ public class Car {
 /**
  * This method use factory to create new device and add it to car	
  * @param deviceId device id
+ * @param state device state
  * 
  */
-	public void addNewDevice(int deviceId){
-		Device device = deviceFactory.createDevice(deviceId,getCarId()); // create device use factoty
+	public void addNewDevice(int deviceId, int state){
+		Device device = deviceFactory.createDevice(deviceId,getCarId(), state); // create device use factoty
 		new Thread(device).start();
 		devices.add(device);
 		

@@ -6,8 +6,8 @@ public class Accelerometer extends Device {
  * @param deviceId id of device 
  * @param carId id of car 
  */
-	public Accelerometer(int deviceId, int carId) {
-		super(deviceId, carId);
+	public Accelerometer(int deviceId, int carId, int state) {
+		super(deviceId, carId, state);
 		setPower(1200);
 		setDeviceType("Accelerometer");
 	}

@@ -67,7 +67,7 @@ public class CreateDevice extends Functionality{
 	public void sendCommand(String cmd) {
 		String data = null;
 		String[] commands = cmd.split(",");
-		simulator.addDevice(commands[0]+"&"+commands[1]+"&"+commands[2]+"&"+commands[3]);
+		simulator.addDevice(commands[0]+"&"+commands[1]+"&"+commands[2]+"&"+"00");
 		int state = simulator.getState(commands[0]+"&"+commands[1]);
     	data = commands[0]+","+commands[1]+","+state+","+"00";
     	connect.insert(data);   	       

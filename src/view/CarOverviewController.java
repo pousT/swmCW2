@@ -1,12 +1,22 @@
 package view;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import main.MainApp;
 import car.Car;
-
 import devices.Device;
+import functionality.ChangeState;
+import functionality.CreateDevice;
 import functionality.DeleteDevice;
 public class CarOverviewController {
 	@FXML
@@ -27,7 +37,8 @@ public class CarOverviewController {
     private Label stateLabel;
     @FXML
     private Label powerLabel;
-
+    @FXML
+    private Button switchButton;
 	//reference to main app
 	private MainApp mainApp;
     /**
@@ -66,18 +77,26 @@ public class CarOverviewController {
     	if (device != null) {
     		if(device.getState() == 0) {
     			stateLabel.setText("OFF");
+    			BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("../img/off.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    	        Background background = new Background(backgroundImage);
+    			switchButton.setBackground(background);
+    			switchButton.setText("");
     		}
     		else {
     			stateLabel.setText("ON");
+    			BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("../img/on.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    	        Background background = new Background(backgroundImage);
+    			switchButton.setBackground(background);
+    			switchButton.setText("");
     		}
-    		// Fill the labels with info from the person object.
+    		// Fill the labels with info from the device object.
     		deviceIdLabel.setText(Integer.toString(device.getDeviceId()));
     		carIdLabel.setText(Integer.toString(device.getCarId()));
     		powerLabel.setText(Integer.toString(device.getPower()));
     		deviceTypeLabel.setText(device.getDeviceType());
     		
     	} else {
-    		// Person is null, remove all the text.
+    		// device is null, remove all the text.
     		deviceIdLabel.setText("");
     		carIdLabel.setText("");
     		stateLabel.setText("");
@@ -90,20 +109,64 @@ public class CarOverviewController {
      */
     @FXML
     private void handleDeleteDevice() {
-        String cid = carIdLabel.getText();
-        String did = deviceIdLabel.getText();
-        String cmd = cid + "," + did;
-        DeleteDevice.getInstance().sendCommand(cmd);
+    	int selectedIndex = deviceTable.getSelectionModel().getSelectedIndex();
+    	if(selectedIndex < 0) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Device Selected");
+            alert.setContentText("Please select a device.");
+
+            alert.showAndWait();    		
+    	}
+    	else {
+	        String cid = carIdLabel.getText();
+	        String did = deviceIdLabel.getText();
+	        String cmd = cid + "," + did;
+	        DeleteDevice.getInstance().sendCommand(cmd);    		
+    	}
+
+    }
+    /**
+     * Called when the user clicks on the switch button.
+     */
+    @FXML
+    private void handleChangeState() {
+    	int selectedIndex = deviceTable.getSelectionModel().getSelectedIndex();
+    	if(selectedIndex < 0) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Device Selected");
+            alert.setContentText("Please select a device.");
+
+            alert.showAndWait();    		
+    	}
+    	else {
+	        String cid = carIdLabel.getText();
+	        String did = deviceIdLabel.getText();
+	        String curState = stateLabel.getText();
+	        String state = null;
+	        if(curState == "OFF") {
+	        	state = "1"; // if off, switch to ON	        	
+	        } else if (curState == "ON") {
+	        	state = "0";
+	        }
+	        String cmd = cid + "," + did + "," + state;
+	        ChangeState.getInstance().sendCommand(cmd); 
+	        showDeviceDetails(deviceTable.getSelectionModel().getSelectedItem());
+    	}
+
     }
     /**
      * Called when the user clicks on the new button.
      */
     @FXML
     private void handleNewDevice() {
-        String cid = carIdLabel.getText();
-        String did = deviceIdLabel.getText();
-        String cmd = cid + "," + did;
-        DeleteDevice.getInstance().sendCommand(cmd);
+		boolean okClicked = mainApp.showDevicenNewDialog();
+		if (okClicked) {
+			
+		}
     }
 	/**
      * Is called by the main application to give a reference back to itself.
