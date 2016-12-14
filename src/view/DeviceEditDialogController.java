@@ -2,10 +2,14 @@ package view;
 import car.Car;
 
 import devices.*;
+import functionality.CreateDevice;
+import functionality.DeleteDevice;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -18,13 +22,11 @@ public class DeviceEditDialogController {
     @FXML
     private TextField deviceIdField;
     @FXML
-    private TextField streetField;
+    private ToggleGroup state;
     @FXML
-    private TextField postalCodeField;
+    private RadioButton offButton;
     @FXML
-    private TextField cityField;
-    @FXML
-    private TextField birthdayField;
+    private RadioButton onButton;
     
     private Stage dialogStage;
     private boolean okClicked = false;
@@ -61,6 +63,11 @@ public class DeviceEditDialogController {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+    }
+    /**
+     * set car id list in combo box
+     */
+    public void setCarIdBox(){
         carIdBox.setItems(mainApp.getcarData());
         carIdBox.setConverter(new StringConverter<Car>() {
 
@@ -73,6 +80,31 @@ public class DeviceEditDialogController {
             public Car fromString(String string) {
                return null;
             }
-        });
+        });    	
     }
+    public void setRadioButton() {
+    	offButton.setUserData("0");
+    	onButton.setUserData("1");
+    }
+    /**
+     * Called when the user clicks ok.
+     */
+    @FXML
+    private void handleOk() {
+    	System.out.println("ok");
+        if (isInputValid()) {
+            String cid = Integer.toString(carIdBox.getValue().getCarId());
+            String did = deviceIdField.getText();
+            String dstate = (String) state.getSelectedToggle().getUserData();
+            String cmd = cid + "," + did + "," + dstate;
+            CreateDevice.getInstance().sendCommand(cmd);
+            okClicked = true;
+            dialogStage.close();
+        }
+    }
+	private boolean isInputValid() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+    
 }

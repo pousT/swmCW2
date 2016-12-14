@@ -44,13 +44,13 @@
             </ButtonBar>
             <Label text="Device ID" GridPane.rowIndex="1" />
             <Label fx:id="carIdLabel" GridPane.columnIndex="1" />
-            <TextField prefHeight="27.0" prefWidth="147.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="deviceIdField" prefHeight="27.0" prefWidth="147.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ComboBox fx:id="carIdBox" prefHeight="27.0" prefWidth="241.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <ButtonBar layoutX="153.0" layoutY="216.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button mnemonicParsing="false" text="ok" />
+          <Button mnemonicParsing="false" onAction="#handleOk" text="ok" />
             <Button mnemonicParsing="false" text="cancel" />
         </buttons>
       </ButtonBar>

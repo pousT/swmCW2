@@ -126,6 +126,8 @@ public class MainApp extends Application {
 			DeviceEditDialogController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
 			controller.setMainApp(this);
+			controller.setCarIdBox();
+			controller.setRadioButton();
 			
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();
