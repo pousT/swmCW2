@@ -2,9 +2,11 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -32,14 +34,18 @@
             <Label text="State" GridPane.rowIndex="4" />
             <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <buttons>
-                  <RadioButton fx:id="offButton" mnemonicParsing="false" text="OFF" />
-                  <RadioButton fx:id="state" mnemonicParsing="false" text="ON" />
+                  <RadioButton fx:id="offButton" mnemonicParsing="false" text="OFF">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="state" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="onButton" mnemonicParsing="false" text="ON" toggleGroup="$state" />
                </buttons>
             </ButtonBar>
             <Label text="Device ID" GridPane.rowIndex="1" />
             <Label fx:id="carIdLabel" GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="carIdField" GridPane.columnIndex="1" />
+            <TextField prefHeight="27.0" prefWidth="147.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="carIdBox" prefHeight="27.0" prefWidth="241.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <ButtonBar layoutX="153.0" layoutY="216.0" prefHeight="40.0" prefWidth="200.0">

@@ -32,7 +32,7 @@ public class MainApp extends Application {
     private Simulator sim;
     private ConnectionDB db;
     /**
-     * initialize simulator, database instance, manager and car list
+     * initialize simulator, database instance and car list
      */
     public MainApp() {
     	sim = Simulator.getInstance();
@@ -107,7 +107,7 @@ public class MainApp extends Application {
 	 * @param car the car object to add device 
 	 * @return true if the user clicked OK, false otherwise.
 	 */
-	public boolean showDevicenNewDialog(String carId) {
+	public boolean showDevicenNewDialog() {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 			FXMLLoader loader = new FXMLLoader();
@@ -122,10 +122,11 @@ public class MainApp extends Application {
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 
-			// Set the device into the controller.
+			// Set the car into the controller.
 			DeviceEditDialogController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
-
+			controller.setMainApp(this);
+			
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();
 

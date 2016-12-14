@@ -70,14 +70,14 @@ public class CarOverviewController {
     		else {
     			stateLabel.setText("ON");
     		}
-    		// Fill the labels with info from the person object.
+    		// Fill the labels with info from the device object.
     		deviceIdLabel.setText(Integer.toString(device.getDeviceId()));
     		carIdLabel.setText(Integer.toString(device.getCarId()));
     		powerLabel.setText(Integer.toString(device.getPower()));
     		deviceTypeLabel.setText(device.getDeviceType());
     		
     	} else {
-    		// Person is null, remove all the text.
+    		// device is null, remove all the text.
     		deviceIdLabel.setText("");
     		carIdLabel.setText("");
     		stateLabel.setText("");
@@ -100,7 +100,7 @@ public class CarOverviewController {
      */
     @FXML
     private void handleNewDevice() {
-		boolean okClicked = mainApp.showDevicenNewDialog(carIdLabel.getText());
+		boolean okClicked = mainApp.showDevicenNewDialog();
 		if (okClicked) {
 			
 		}

@@ -4,14 +4,17 @@ import car.Car;
 import devices.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
+import javafx.util.StringConverter;
+import javafx.util.converter.IntegerStringConverter;
+import main.MainApp;
 import javafx.scene.Group;
 public class DeviceEditDialogController {
 
     @FXML
-    private TextField carIdField;
+    private ComboBox<Car> carIdBox;
     @FXML
     private TextField deviceIdField;
     @FXML
@@ -24,9 +27,9 @@ public class DeviceEditDialogController {
     private TextField birthdayField;
     
     private Stage dialogStage;
-    private Device device;
     private boolean okClicked = false;
-	private Car car;
+	//reference to main app
+	private MainApp mainApp;
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -42,17 +45,6 @@ public class DeviceEditDialogController {
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
-    /**
-     * Sets the device to be edited in the dialog.
-     * 
-     * @param device
-     */
-    public void setDevice(Device device) {
-        this.device = device;
-
-        carIdField.setText(Integer.toString(device.getCarId()));
-        deviceIdField.setText(Integer.toString(device.getDeviceId()));
-    }
 
     /**
      * Returns true if the user clicked OK, false otherwise.
@@ -62,13 +54,25 @@ public class DeviceEditDialogController {
     public boolean isOkClicked() {
         return okClicked;
     }
-    /**
+	/**
+     * Is called by the main application to give a reference back to itself.
      * 
-     * @param car
+     * @param mainApp
      */
-	public void setCar(Car car) {
-		this.car = car;
-		
-	}
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+        carIdBox.setItems(mainApp.getcarData());
+        carIdBox.setConverter(new StringConverter<Car>() {
 
+            @Override
+            public String toString(Car car) {
+               return Integer.toString(car.getCarId());
+            }
+
+            @Override
+            public Car fromString(String string) {
+               return null;
+            }
+        });
+    }
 }
