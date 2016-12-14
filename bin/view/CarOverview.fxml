@@ -62,7 +62,7 @@
                               <ButtonBar layoutX="94.0" layoutY="234.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                                  <buttons>
                                     <Button mnemonicParsing="false" onAction="#handleDeleteDevice" text="Delete" />
-                                    <Button fx:id="switchButton" mnemonicParsing="false" onAction="#handleChangeState" />
+                                    <Button fx:id="switchButton" mnemonicParsing="false" onAction="#handleChangeState" text="Switch" />
                                  </buttons>
                               </ButtonBar>
                            </children>
