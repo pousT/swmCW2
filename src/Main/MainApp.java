@@ -94,6 +94,7 @@ public class MainApp extends Application {
             rootLayout.setCenter(overviewPage);
             CarOverviewController controller = loader.getController();
             controller.setMainApp(this);
+            controller.setImges();
         } catch (IOException e) {
             // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
@@ -122,13 +123,12 @@ public class MainApp extends Application {
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 
-			// Set the car into the controller.
+			// Set the device into the controller.
 			DeviceEditDialogController controller = loader.getController();
-			controller.setDialogStage(dialogStage);
 			controller.setMainApp(this);
+			controller.setDialogStage(dialogStage);
 			controller.setCarIdBox();
 			controller.setRadioButton();
-			
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();
 

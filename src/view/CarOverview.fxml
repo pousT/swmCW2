@@ -61,7 +61,7 @@
                               </GridPane>
                               <ButtonBar layoutX="94.0" layoutY="234.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                                  <buttons>
-                                    <Button mnemonicParsing="false" onAction="#handleDeleteDevice" text="Delete" />
+                                    <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#handleDeleteDevice" />
                                     <Button fx:id="switchButton" mnemonicParsing="false" onAction="#handleChangeState" />
                                  </buttons>
                               </ButtonBar>

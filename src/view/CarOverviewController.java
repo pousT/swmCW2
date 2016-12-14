@@ -39,6 +39,8 @@ public class CarOverviewController {
     private Label powerLabel;
     @FXML
     private Button switchButton;
+    @FXML
+    private Button deleteButton;
 	//reference to main app
 	private MainApp mainApp;
     /**
@@ -176,6 +178,17 @@ public class CarOverviewController {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
         // Add observable list data to the table
-        carTable.setItems(mainApp.getcarData());        
+        carTable.setItems(mainApp.getcarData()); 
+    }
+    /**
+     * set icons 
+     */
+    public void setImges() {
+		BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("../img/off.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background background = new Background(backgroundImage);
+		switchButton.setBackground(background);
+		BackgroundImage backgroundImageDelete = new BackgroundImage( new Image( getClass().getResource("../img/delete.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background backgroundDelete = new Background(backgroundImageDelete);
+		deleteButton.setBackground(backgroundDelete);    	
     }
 }
