@@ -1,9 +1,13 @@
 package view;
 
+
 import devices.Device;
 import functionality.CreateProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import main.MainApp;
 
@@ -72,8 +76,29 @@ public class PropertyEditDialogController {
         }
     }
 	private boolean isInputValid() {
-		// TODO Auto-generated method stub
-		return true;
+		 String errorMessage = "";
+	        if (propertyNameField.getText() == null || propertyNameField.getText().length() == 0) {
+	            errorMessage += "Please specify property name!\n"; 
+	        }else if (propertyValueField.getText() == null || propertyValueField.getText().length() == 0) {
+	            errorMessage += "Please specify property value!\n"; 
+	        }else if( propertyNameField.getText().length()>10) {
+	        	errorMessage += "property name should less than 10 characters!\n"; 
+	        }else if( propertyValueField.getText().length()>10) {
+	        	errorMessage += "property value should less than 10 characters\n";
+	        }
+	        if (errorMessage.length() == 0) {
+	            return true;
+	        } else {
+	            // Show the error message.
+	            Alert alert = new Alert(AlertType.WARNING);
+	            alert.initOwner(mainApp.getPrimaryStage());
+	            alert.setTitle("Invalid Input");
+	            alert.setHeaderText("Invalid New Property");
+	            alert.setContentText(errorMessage);
+
+	            alert.showAndWait();  
+	            return false;
+	        }
 	}
 	public void setDevice(Device selectedDevice) {
 		this.device = selectedDevice;
