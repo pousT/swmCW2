@@ -697,10 +697,36 @@ public class ConnectionDB {
             }
         	
         } catch (SQLException e) {
-        	// TODO Auto-generated catch block
+        	
         	e.printStackTrace();
 		}
         return result;
+	}
+
+	public void deletePropertyById(String cmd) {
+    	conn = getConnection(); 
+        String linedata[] = cmd.split(",");
+        
+        try {
+				
+	        	String sql = "DELETE FROM Property"
+	        				 +" WHERE (CID="+linedata[0]+")"+"AND (DID="+linedata[1]+")";
+	        
+	        	st = conn.createStatement();
+			
+	        	int count = st.executeUpdate(sql);
+	        	
+	        	System.out.println("delete from Property " + count + " numbers of data");   
+	            
+	            st.close();
+	            conn.close();
+//			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
 	}
 
 }

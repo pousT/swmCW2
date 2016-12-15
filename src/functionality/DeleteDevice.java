@@ -50,6 +50,6 @@ public class DeleteDevice extends Functionality{
  	   String[] commands = cmd.split(",");
  	   simulator.removeDevice(commands[0]+"&"+commands[1]);
  	   connect.delete(cmd);
-		
+ 	   connect.deletePropertyById(cmd);
 	}
 }
