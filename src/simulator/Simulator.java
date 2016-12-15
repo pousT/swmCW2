@@ -187,7 +187,30 @@ public class Simulator extends Observable {
 		this.setChanged();
 		this.notifyObservers(statecommand); 
 	}
-	
+	/**
+	 * this should be called as the web app create a new property of a specified car device
+	 * @param commands
+	 */
+	public void addProperty(String commands) {
+		String[] splitIdentifier = commands.split("&");
+		int carId = Integer.parseInt(splitIdentifier[0]);
+		int deviceId = Integer.parseInt(splitIdentifier[1]);
+		String propertyName =splitIdentifier[2];
+		String propertyValue = splitIdentifier[3];
+        System.out.println("Success!!");
+        
+		for (int i = 0; i < cars.size(); i++) {
+			if (cars.get(i).getCarId() == carId) {
+				for (int j = 0; j < cars.get(i).devices.size(); j++) {
+					if (cars.get(i).devices.get(j).getDeviceId() == deviceId) {
+						cars.get(i).devices.get(j).addNewProperty(propertyName, propertyValue);
+					}
+				}
+			}
+		}
+		
+	}
+	/**
 	/* This should be called to provide real temperature.
 	 */
 	public int getTemperature() {

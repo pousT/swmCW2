@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import simulator.Simulator;
 import view.CarOverviewController;
 import view.DeviceEditDialogController;
+import view.PropertyEditDialogController;
 import car.Car;
 
 import db.ConnectionDB;
@@ -139,6 +140,41 @@ public class MainApp extends Application {
 		}
 	}
 	/**
+	 * Open a dialog to add new property for a specified car device
+	 * @param selectedDevice 
+	 */
+	public void showPropertyNewDialog(Device selectedDevice) {
+		try {
+			System.out.println("show dialog");
+			// Load the fxml file and create a new stage for the popup dialog.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("../view/PropertyEditDialog.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			// Create the dialog Stage.
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("New Property");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			// Set the device into the controller.
+			PropertyEditDialogController controller = loader.getController();
+			controller.setMainApp(this);
+			controller.setDevice(selectedDevice);
+			controller.setDialogStage(dialogStage);
+			// Show the dialog and wait until the user closes it
+			dialogStage.showAndWait();
+
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+		}		
+		
+	}	
+	/**
 	 * This method load car record from database, moved from previous main method in 
 	 * FileMonitor class
 	 */
@@ -157,4 +193,5 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }

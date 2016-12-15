@@ -20,7 +20,7 @@ public class CreateDevice extends Functionality{
      * change constructor to private for singleton pattern
      * @param simulator
      */
-    public CreateDevice(Simulator simulator){
+    private CreateDevice(Simulator simulator){
 	    CreateDevice.simulator = simulator;
     }
     

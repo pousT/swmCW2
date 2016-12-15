@@ -39,7 +39,7 @@
             </ButtonBar>
             <Label text="Device ID" GridPane.rowIndex="1" />
             <Label GridPane.columnIndex="1" />
-            <TextField fx:id="deviceIdField" onKeyTyped="#setDeviceType" prefHeight="27.0" prefWidth="147.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="deviceIdField" prefHeight="27.0" prefWidth="147.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ComboBox fx:id="carIdBox" prefHeight="27.0" prefWidth="241.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>

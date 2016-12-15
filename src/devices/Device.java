@@ -7,6 +7,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Device implements Observer, Runnable {
@@ -16,9 +17,9 @@ public class Device implements Observer, Runnable {
 	private IntegerProperty state;
 	private IntegerProperty power;
 	/**
-	 * changed from array list to observable list
+	 * observable list of user defined device properties
 	 */
-	public ObservableList<Property> properties;
+	private ObservableList<Property> properties;
 	/**
 	 * device type 
 	 */
@@ -35,6 +36,7 @@ public class Device implements Observer, Runnable {
 		this.state = new SimpleIntegerProperty(state);
 		this.power = new SimpleIntegerProperty(100);
 		this.deviceType = new SimpleStringProperty("Device");
+		this.properties =  FXCollections.observableArrayList();
 		System.out.println(this.toString());
 	}
 	
@@ -96,6 +98,26 @@ public class Device implements Observer, Runnable {
 	public int getCarId() {
 		return carId.get();
 	}
+	/**
+	 * get property list
+	 * @return properties
+	 */
+	public ObservableList<Property> getProperties() {
+		return properties;
+	}
+
+	/**
+	 * add new property
+	 * @param propertyName
+	 * @param value
+	 */
+	public void addNewProperty(String propertyName, String value){
+		
+		Property newProperty = new Property(propertyName, value);
+		properties.add(newProperty);
+		
+	}
+	
 	public void notifySensor(int state) {
 		System.out.println("!!!!");
 	}

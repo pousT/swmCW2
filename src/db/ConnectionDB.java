@@ -640,5 +640,45 @@ public class ConnectionDB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-    }   
+    }
+    /**
+     * Insert a property for a specified car device into Property table
+     * @param data
+     */
+	public void insertProperty(String data) {
+        conn = getConnection(); 
+        String linedata[] = data.split(",");
+        try {
+        	String ssql = "SELECT * FROM Property WHERE (CID='"+linedata[0]+"') AND (DID='"+linedata[1] +"') AND (PNAME='"+ linedata[2]+"')";
+        	st = conn.createStatement();
+            ResultSet rs = st.executeQuery(ssql);
+            int counter = 0;
+            	
+            while(rs.next()) {
+            	counter = rs.getInt(1);
+            	System.out.println(rs.getString("DID")+"!111111111");
+            }
+                   
+           	if(counter == 0){ // no data 
+            	
+	            String sql = "INSERT INTO Property(CID, DID, PNAME, PVALUE)"    
+	                        + " VALUES ('"+linedata[0]+"','"+linedata[1]+"','"+linedata[2]+"','"+linedata[3]+"')";   
+	            System.out.println("sql="+sql);  
+	                    
+	            st = conn.createStatement();
+						  
+	            int count = st.executeUpdate(sql);
+	                        
+	            System.out.println("insert into Property " + count + " numbers of data");   
+	                        
+	            st.close();
+	            conn.close(); 
+           	}
+        } catch(SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+
 }

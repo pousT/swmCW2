@@ -15,6 +15,7 @@ import javafx.scene.layout.BackgroundSize;
 import main.MainApp;
 import car.Car;
 import devices.Device;
+import devices.Property;
 import functionality.ChangeState;
 import functionality.CreateDevice;
 import functionality.DeleteDevice;
@@ -41,8 +42,15 @@ public class CarOverviewController {
     private Button switchButton;
     @FXML
     private Button deleteButton;
-	//reference to main app
+    @FXML
+    private TableView<Property> propertyTable;
+    @FXML
+	private TableColumn<Property, String> propertyNameColumn;
+    @FXML
+	private TableColumn<Property, String> propertyValueColumn;
+    
 	private MainApp mainApp;
+	private Property propertySelected;
     /**
      * The constructor.
      * The constructor is called before the initialize() method.
@@ -83,7 +91,7 @@ public class CarOverviewController {
     	        Background background = new Background(backgroundImage);
     			switchButton.setBackground(background);
     			switchButton.setText("");
-    		}
+            }
     		else {
     			stateLabel.setText("ON");
     			BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("../img/on.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -96,7 +104,12 @@ public class CarOverviewController {
     		carIdLabel.setText(Integer.toString(device.getCarId()));
     		powerLabel.setText(Integer.toString(device.getPower()));
     		deviceTypeLabel.setText(device.getDeviceType());
-    		
+    		// FIll property table
+    		propertyTable.setItems(device.getProperties());
+            propertyNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+            propertyValueColumn.setCellValueFactory(cellData -> cellData.getValue().valueProperty());
+    		propertyTable.getSelectionModel().selectedItemProperty().addListener(
+    				(observable, oldValue, newValue) -> setProperty(newValue));    		
     	} else {
     		// device is null, remove all the text.
     		deviceIdLabel.setText("");
@@ -107,6 +120,13 @@ public class CarOverviewController {
     	}
     }
     /**
+     * set user selected property
+     * @param newValue
+     */
+    private void setProperty(Property newValue) {
+		this.propertySelected = newValue;
+	}
+	/**
      * Called when the user clicks on the delete button.
      */
     @FXML
@@ -165,10 +185,24 @@ public class CarOverviewController {
      */
     @FXML
     private void handleNewDevice() {
-		boolean okClicked = mainApp.showDevicenNewDialog();
-		if (okClicked) {
-			
-		}
+		mainApp.showDevicenNewDialog();
+    }
+    @FXML
+    private void handleNewProperty() {
+    	int dIndex = deviceTable.getSelectionModel().getSelectedIndex();
+    	if (dIndex < 0) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Device Selected");
+            alert.setContentText("Please select a device to add property.");
+
+            alert.showAndWait();      		
+    	} else {
+    	Device selectedDevice = deviceTable.getSelectionModel().getSelectedItem();
+    	mainApp.showPropertyNewDialog(selectedDevice);    		
+    	}
+
     }
 	/**
      * Is called by the main application to give a reference back to itself.
