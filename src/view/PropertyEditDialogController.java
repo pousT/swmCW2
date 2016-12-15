@@ -2,6 +2,7 @@ package view;
 
 
 import devices.Device;
+import devices.Property;
 import functionality.CreateProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -113,6 +114,10 @@ public class PropertyEditDialogController {
      */
 	public void setDevice(Device selectedDevice) {
 		this.device = selectedDevice;
+		
+	}
+	public void setProperty(Property selectedProperty) {
+		this.propertyNameField.setText(selectedProperty.getName());
 		
 	}
     

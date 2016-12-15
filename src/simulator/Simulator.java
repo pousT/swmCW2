@@ -188,7 +188,7 @@ public class Simulator extends Observable {
 		this.notifyObservers(statecommand); 
 	}
 	/**
-	 * this should be called as the web app create a new property of a specified car device
+	 * this should be called as the web app create a new property of a specified car device, or change property value
 	 * @param commands
 	 */
 	public void addProperty(String commands) {
@@ -203,7 +203,15 @@ public class Simulator extends Observable {
 			if (cars.get(i).getCarId() == carId) {
 				for (int j = 0; j < cars.get(i).devices.size(); j++) {
 					if (cars.get(i).devices.get(j).getDeviceId() == deviceId) {
-						cars.get(i).devices.get(j).addNewProperty(propertyName, propertyValue);
+						Device device = cars.get(i).devices.get(j);
+						for(int k = 0; k < device.getProperties().size(); k++) {
+							if(device.getProperties().get(k).getName().equals(propertyName)) {
+								device.getProperties().get(k).setValue(propertyValue);
+								System.out.println("find property");
+								return;
+							}
+						}
+						device.addNewProperty(propertyName, propertyValue);
 					}
 				}
 			}

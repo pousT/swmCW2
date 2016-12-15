@@ -673,6 +673,17 @@ public class ConnectionDB {
 	                        
 	            st.close();
 	            conn.close(); 
+           	} else {
+	        	String sql = "UPDATE Property SET PVALUE = '"+linedata[3]+"' WHERE (CID='"+linedata[0]+"')"+"AND (DID='"+linedata[1] + "')"+"AND (PNAME='"+linedata[2]+"')";
+		        
+	        	st = conn.createStatement();
+			
+	        	int count = st.executeUpdate(sql);
+	        	
+	        	System.out.println("update from Property " + count + " numbers of data");   
+	            
+	            st.close();
+	            conn.close();           		
            	}
         } catch(SQLException e) {
 			

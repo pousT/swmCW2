@@ -20,6 +20,7 @@ import car.Car;
 
 import db.ConnectionDB;
 import devices.Device;
+import devices.Property;
 /**
  * This class is the entrance of GUI
  * @author tangshulan
@@ -173,7 +174,44 @@ public class MainApp extends Application {
 			
 		}		
 		
-	}	
+	}
+	/**
+	 * Open a dialog to update a selected property
+	 * @param selectedProperty
+	 * @return
+	 */
+	public boolean showPropertyEditDialog(Device selectedDevice, Property selectedProperty) {
+		try {
+			System.out.println("show dialog");
+			// Load the fxml file and create a new stage for the popup dialog.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("../view/PropertyEditDialog.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			// Create the dialog Stage.
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Update Property");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			// Set the device into the controller.
+			PropertyEditDialogController controller = loader.getController();
+			controller.setMainApp(this);
+			controller.setDevice(selectedDevice);
+			controller.setProperty(selectedProperty);
+			controller.setDialogStage(dialogStage);
+			// Show the dialog and wait until the user closes it
+			dialogStage.showAndWait();
+			return controller.isOkClicked();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+		}
+		return false;
+	}
 	/**
 	 * This method load car record from database, moved from previous main method in 
 	 * FileMonitor class
@@ -200,5 +238,6 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 
 }

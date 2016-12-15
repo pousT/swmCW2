@@ -33,7 +33,7 @@
                               <ButtonBar layoutX="-11.0" layoutY="301.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                 <buttons>
                                   <Button mnemonicParsing="false" onAction="#handleNewProperty" text="New" />
-                                    <Button mnemonicParsing="false" text="Update" />
+                                    <Button mnemonicParsing="false" onAction="#handleUpdateProperty" text="Update" />
                                 </buttons>
                               </ButtonBar>
                            </children>

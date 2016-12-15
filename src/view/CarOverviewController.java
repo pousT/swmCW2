@@ -13,11 +13,13 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import main.MainApp;
+
+
+
 import car.Car;
 import devices.Device;
 import devices.Property;
 import functionality.ChangeState;
-import functionality.CreateDevice;
 import functionality.DeleteDevice;
 public class CarOverviewController {
 	@FXML
@@ -202,8 +204,32 @@ public class CarOverviewController {
     	Device selectedDevice = deviceTable.getSelectionModel().getSelectedItem();
     	mainApp.showPropertyNewDialog(selectedDevice);    		
     	}
-
     }
+	/**
+	 * Called when the user clicks the update button. Opens a dialog to edit
+	 * details for the selected property.
+	 */
+	@FXML
+	private void handleUpdateProperty() {
+		Property selectedProperty = propertyTable.getSelectionModel().getSelectedItem();
+		Device selectedDevice = deviceTable.getSelectionModel().getSelectedItem();
+		if (selectedProperty != null) {
+			boolean okClicked = mainApp.showPropertyEditDialog(selectedDevice,selectedProperty);
+			if (okClicked) {
+				showDeviceDetails(selectedDevice);
+			}
+
+		} else {
+			// Nothing selected.
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Device Selected");
+            alert.setContentText("Please select a property to update.");
+
+            alert.showAndWait();   
+		}
+	}
 	/**
      * Is called by the main application to give a reference back to itself.
      * 
