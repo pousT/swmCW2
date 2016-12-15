@@ -681,4 +681,26 @@ public class ConnectionDB {
 		
 	}
 
+	public List<String> getProperty() {
+    	conn = getConnection(); 
+        List<String> result = new ArrayList<String>();
+    	
+        try{
+        	String ssql = "SELECT * FROM Property";
+        	st = conn.createStatement();
+            ResultSet rs = st.executeQuery(ssql);         
+
+            while(rs.next()) {
+                String string= null;
+                string = rs.getString("CID")+"&"+rs.getString("DID")+ "&" +rs.getString("PNAME") + "&" +rs.getString("PVALUE");
+            	result.add(string);
+            }
+        	
+        } catch (SQLException e) {
+        	// TODO Auto-generated catch block
+        	e.printStackTrace();
+		}
+        return result;
+	}
+
 }

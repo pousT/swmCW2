@@ -180,14 +180,21 @@ public class MainApp extends Application {
 	 */
     private void loadRecords() {
 		List<String> resultID = db.getID();
-
+		// create car devices
 		if(db.getID().size()!=0) {
 			for(int i=0; i<resultID.size(); i++) {
 				sim.addDevice(resultID.get(i)+"&"+
 												  db.getState(resultID.get(i)).get(0)+"&"+
 											      db.getValue(resultID.get(i)));
 			}
-		}    	
+		}
+		//create and add properties
+		List<String> resultProperty = db.getProperty();
+		if(db.getProperty().size() != 0) {
+			for(int j = 0; j < resultProperty.size(); j++) {
+				sim.addProperty(resultProperty.get(j));
+			}
+		}
     }
 
     public static void main(String[] args) {
