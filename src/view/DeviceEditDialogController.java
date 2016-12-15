@@ -5,11 +5,14 @@ import devices.*;
 import functionality.CreateDevice;
 import functionality.DeleteDevice;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -33,6 +36,7 @@ public class DeviceEditDialogController {
     private boolean okClicked = false;
 	//reference to main app
 	private MainApp mainApp;
+	private ObservableList<Car> cars;
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -64,6 +68,7 @@ public class DeviceEditDialogController {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+        this.cars = mainApp.getcarData();
     }
     /**
      * set car id list in combo box
@@ -108,8 +113,55 @@ public class DeviceEditDialogController {
         }
     }
 	private boolean isInputValid() {
-		// TODO Auto-generated method stub
-		return true;
+		 String errorMessage = "";
+	        if (carIdBox.getValue() == null) {
+	            errorMessage += "Please select a car!\n"; 
+	        }else if (deviceIdField.getText() == null || deviceIdField.getText().length() == 0){
+	        	 errorMessage += "Please set device id!\n"; 
+	        } else {
+	            // try to parse the postal code into an int.
+	            try {
+	                Integer.parseInt(deviceIdField.getText());
+	            } catch (NumberFormatException e) {
+	                errorMessage += "Invalid device id (must be an integer)!\n"; 
+	            }
+		
+	        }
+	        if(errorMessage.length() == 0) {
+	        	int did = Integer.parseInt(deviceIdField.getText());
+	        	if(searchDevice(carIdBox.getValue(), did) != null) { // device already exists
+	        		errorMessage += "device id already exists!\n"; 
+	        	}
+	        }
+	        if(errorMessage.length() == 0) {
+	        	return true;        	
+	        } else {
+	            // Show the error message.
+	            Alert alert = new Alert(AlertType.WARNING);
+	            alert.initOwner(mainApp.getPrimaryStage());
+	            alert.setTitle("Invalid Input");
+	            alert.setHeaderText("Invalid New Device");
+	            alert.setContentText(errorMessage);
+
+	            alert.showAndWait();  	        	
+	        	return false;
+	        }
+	        
 	}
-    
+	/**
+	 * check whether a device exists
+	 * @param car
+	 * @param did
+	 * @return
+	 */
+    private Device searchDevice(Car car, int did) {
+
+		ObservableList<Device> devices = car.getDevices();
+		for(int j = 0; j < devices.size(); j++) {
+			if(devices.get(j).getDeviceId() == did) {
+				return devices.get(j);
+			}
+		}	
+    	return null;
+    }
 }
