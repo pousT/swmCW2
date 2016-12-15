@@ -27,7 +27,8 @@ public class DeviceEditDialogController {
     private RadioButton offButton;
     @FXML
     private RadioButton onButton;
-    
+    @FXML
+    private TextField deviceTypeField;
     private Stage dialogStage;
     private boolean okClicked = false;
 	//reference to main app
@@ -82,10 +83,14 @@ public class DeviceEditDialogController {
             }
         });    	
     }
+    /**
+     * set off and on value for state radio button
+     */
     public void setRadioButton() {
     	offButton.setUserData("0");
     	onButton.setUserData("1");
     }
+
     /**
      * Called when the user clicks ok.
      */

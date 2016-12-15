@@ -7,6 +7,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 
 public class Device implements Observer, Runnable {
 
@@ -14,6 +15,10 @@ public class Device implements Observer, Runnable {
 	private IntegerProperty carId;
 	private IntegerProperty state;
 	private IntegerProperty power;
+	/**
+	 * changed from array list to observable list
+	 */
+	public ObservableList<Property> properties;
 	/**
 	 * device type 
 	 */
@@ -32,12 +37,13 @@ public class Device implements Observer, Runnable {
 		this.deviceType = new SimpleStringProperty("Device");
 		System.out.println(this.toString());
 	}
+	
 	/**
 	 *  Device information, separated from constructor 
 	 */
 	@Override
 	public String toString() {
-		return "Car " + carId + " Device " + deviceId + " created";
+		return "Car " + carId + " Device " + deviceId + ", " + getDeviceType()+  " created";
 	}
 	/**
 	 * get device id property

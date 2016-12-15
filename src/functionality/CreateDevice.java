@@ -72,6 +72,6 @@ public class CreateDevice extends Functionality{
     	data = commands[0]+","+commands[1]+","+state+","+"00";
     	connect.insert(data);   	       
 	}
-
+	
     
 }
