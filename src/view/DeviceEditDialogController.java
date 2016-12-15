@@ -148,6 +148,13 @@ public class DeviceEditDialogController {
 	        }
 	        
 	}
+    /**
+     * Called when the user clicks cancel.
+     */
+    @FXML
+    private void handleCancel() {
+        dialogStage.close();
+    }
 	/**
 	 * check whether a device exists
 	 * @param car

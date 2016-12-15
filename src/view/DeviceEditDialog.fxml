@@ -46,7 +46,7 @@
       <ButtonBar layoutX="153.0" layoutY="216.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
           <Button mnemonicParsing="false" onAction="#handleOk" text="ok" />
-            <Button mnemonicParsing="false" text="cancel" />
+            <Button mnemonicParsing="false" onAction="#handleCancel" text="cancel" />
         </buttons>
       </ButtonBar>
    </children>

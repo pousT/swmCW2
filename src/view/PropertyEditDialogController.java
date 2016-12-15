@@ -100,6 +100,17 @@ public class PropertyEditDialogController {
 	            return false;
 	        }
 	}
+    /**
+     * Called when the user clicks cancel.
+     */
+    @FXML
+    private void handleCancel() {
+        dialogStage.close();
+    }
+    /**
+     * set device to add property
+     * @param selectedDevice
+     */
 	public void setDevice(Device selectedDevice) {
 		this.device = selectedDevice;
 		
