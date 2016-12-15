@@ -1,28 +1,32 @@
 package devices;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Property {
 	private String name;
-	private String value;
+	private StringProperty value;
 	/**
 	 * user specified device parameter
 	 * @param name
 	 * @param value
 	 */
 	public Property(String name, String value) {
-		this.setName(name);
-		this.setValue(value);
+		this.name = name;
+		this.value = new SimpleStringProperty(value);
 	}
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	public String getValue() {
+		return value.get();
+	}
+	public StringProperty valueProperty() {
 		return value;
 	}
 	public void setValue(String value) {
-		this.value = value;
+		this.value.set(value);
 	}
 
 }
