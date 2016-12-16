@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="550.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CarOverviewController">
+<AnchorPane prefHeight="550.0" prefWidth="400.0" styleClass="background" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CarOverviewController">
    <children>
       <SplitPane dividerPositions="0.6405109489051095" layoutX="154.0" layoutY="192.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -19,7 +19,7 @@
                <children>
                   <SplitPane dividerPositions="0.4595959595959596" layoutX="56.0" layoutY="59.0" prefHeight="295.0" prefWidth="398.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="background" stylesheets="@stylesheet.css">
                            <children>
                               <TableView fx:id="propertyTable" layoutX="-11.0" layoutY="22.0" prefHeight="301.0" prefWidth="178.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
@@ -32,13 +32,13 @@
                               </TableView>
                               <ButtonBar layoutX="-11.0" layoutY="301.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                 <buttons>
-                                  <Button mnemonicParsing="false" onAction="#handleNewProperty" text="New" />
-                                    <Button mnemonicParsing="false" onAction="#handleUpdateProperty" text="Update" />
+                                  <Button fx:id="newPropertyButton" mnemonicParsing="false" onAction="#handleNewProperty" text="New" />
+                                    <Button fx:id="updatePropertyButton" mnemonicParsing="false" onAction="#handleUpdateProperty" text="Update" />
                                 </buttons>
                               </ButtonBar>
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="background">
                            <children>
                               <GridPane layoutX="14.0" layoutY="57.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                 <columnConstraints>
@@ -53,11 +53,11 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="Device ID" GridPane.rowIndex="1" />
-                                    <Label text="Car ID" GridPane.rowIndex="2" />
-                                    <Label text="State" GridPane.rowIndex="3" />
-                                    <Label text="Power" GridPane.rowIndex="4" />
-                                    <Label text="Type" />
+                                    <Label styleClass="nameLabel" text="Device ID" GridPane.rowIndex="1" />
+                                    <Label styleClass="nameLabel" text="Car ID" GridPane.rowIndex="2" />
+                                    <Label styleClass="nameLabel" text="State" GridPane.rowIndex="3" />
+                                    <Label styleClass="nameLabel" text="Power" GridPane.rowIndex="4" />
+                                    <Label styleClass="nameLabel" text="Type" />
                                     <Label fx:id="deviceTypeLabel" GridPane.columnIndex="1" />
                                     <Label fx:id="deviceIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Label fx:id="carIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -77,7 +77,7 @@
                   </SplitPane>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="background">
                <children>
                   <SplitPane dividerPositions="0.4595959595959596" layoutX="177.0" layoutY="34.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
@@ -107,9 +107,9 @@
                         </AnchorPane>
                     </items>
                   </SplitPane>
-                  <ButtonBar prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="5.0">
+                  <ButtonBar prefHeight="40.0" prefWidth="200.0" styleClass="background" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="5.0">
                     <buttons>
-                      <Button mnemonicParsing="false" onAction="#handleNewDevice" text="New Device" />
+                      <Button fx:id="newDeviceButton" mnemonicParsing="false" onAction="#handleNewDevice" styleClass="iconBt" text="New Device" />
                     </buttons>
                   </ButtonBar>
                </children>
