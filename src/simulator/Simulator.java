@@ -77,8 +77,8 @@ public class Simulator extends Observable {
 		for (int i = 0; i < cars.size(); i++) {
 			if (cars.get(i).getCarId() == carId) {
 				cars.get(i).addNewDevice(deviceId,state);
-				int length = cars.get(i).devices.size();
-				Device device = cars.get(i).devices.get(length-1);
+				int length = cars.get(i).getDevices().size();
+				Device device = cars.get(i).getDevices().get(length-1);
 				this.addObserver(device);    // When the device is created, it will be added as a observer.
 				carExists = true;
 			}
@@ -86,8 +86,8 @@ public class Simulator extends Observable {
 		if (carExists == false) {              // If the car doesn't exists, create this car and then create the specified device
 			addNewCar(carId, factory);
 			cars.get(cars.size()-1).addNewDevice(deviceId,state);
-			int length = cars.get(cars.size()-1).devices.size();
-			Device device = cars.get(cars.size()-1).devices.get(length-1);
+			int length = cars.get(cars.size()-1).getDevices().size();
+			Device device = cars.get(cars.size()-1).getDevices().get(length-1);
 			this.addObserver(device);
 		}
 	}
@@ -107,11 +107,11 @@ public class Simulator extends Observable {
 
 		for (int i = 0; i < cars.size(); i++) {
 			if (cars.get(i).getCarId() == carId) {
-				for (int j = 0; j < cars.get(i).devices.size(); j++) {
-					if (cars.get(i).devices.get(j).getDeviceId() == deviceId) {
-						Device device = cars.get(i).devices.get(j);
+				for (int j = 0; j < cars.get(i).getDevices().size(); j++) {
+					if (cars.get(i).getDevices().get(j).getDeviceId() == deviceId) {
+						Device device = cars.get(i).getDevices().get(j);
 						this.deleteObserver(device);       // When this device is removed, we also delete this observer.
-						cars.get(i).devices.remove(j);	 
+						cars.get(i).getDevices().remove(j);	 
 					}
 				}
 
@@ -137,9 +137,9 @@ public class Simulator extends Observable {
 
 		for (int i = 0; i < cars.size(); i++) {
 			if (cars.get(i).getCarId() == carId) {
-				for (int j = 0; j < cars.get(i).devices.size(); j++) {
-					if (cars.get(i).devices.get(j).getDeviceId() == deviceId) {
-						returnState = cars.get(i).devices.get(j).getState();
+				for (int j = 0; j < cars.get(i).getDevices().size(); j++) {
+					if (cars.get(i).getDevices().get(j).getDeviceId() == deviceId) {
+						returnState = cars.get(i).getDevices().get(j).getState();
 //						System.out.println(returnState);
 					}
 				}
@@ -163,9 +163,9 @@ public class Simulator extends Observable {
 
 		for (int i = 0; i < cars.size(); i++) {
 			if (cars.get(i).getCarId() == carId) {
-				for (int j = 0; j < cars.get(i).devices.size(); j++) {
-					if (cars.get(i).devices.get(j).getDeviceId() == deviceId) {
-						returnState = cars.get(i).devices.get(j).getPower();
+				for (int j = 0; j < cars.get(i).getDevices().size(); j++) {
+					if (cars.get(i).getDevices().get(j).getDeviceId() == deviceId) {
+						returnState = cars.get(i).getDevices().get(j).getPower();
 					}
 				}
 			}
@@ -197,9 +197,9 @@ public class Simulator extends Observable {
         
 		for (int i = 0; i < cars.size(); i++) {
 			if (cars.get(i).getCarId() == carId) {
-				for (int j = 0; j < cars.get(i).devices.size(); j++) {
-					if (cars.get(i).devices.get(j).getDeviceId() == deviceId) {
-						Device device = cars.get(i).devices.get(j);
+				for (int j = 0; j < cars.get(i).getDevices().size(); j++) {
+					if (cars.get(i).getDevices().get(j).getDeviceId() == deviceId) {
+						Device device = cars.get(i).getDevices().get(j);
 						for(int k = 0; k < device.getProperties().size(); k++) {
 							if(device.getProperties().get(k).getName().equals(propertyName)) {
 								device.getProperties().get(k).setValue(propertyValue);

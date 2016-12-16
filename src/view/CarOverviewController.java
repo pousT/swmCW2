@@ -224,7 +224,7 @@ public class CarOverviewController {
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Device Selected");
+            alert.setHeaderText("No Property Selected");
             alert.setContentText("Please select a property to update.");
 
             alert.showAndWait();   

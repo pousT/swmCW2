@@ -8,7 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import devices.Device;
 import devices.DeviceFactory;
-
+/**
+ * This class is implemented to represent a connected car
+ * 
+ */
 public class Car {
 	/**
 	 * use factory create device
@@ -18,7 +21,7 @@ public class Car {
 	/**
 	 * changed from array list to observable list
 	 */
-	public ObservableList<Device> devices;
+	private ObservableList<Device> devices;
 	/**
 	 * initialize a car, create empty device observable list
 	 * @param carId e.g. 00, 01
@@ -51,7 +54,7 @@ public class Car {
 	}
 	/**
 	 * use set method of property to set car id 
-	 * @param carId
+	 * @param carId car id
 	 */
 	public void setCarId(int carId) {
 		this.carId.set(carId);
