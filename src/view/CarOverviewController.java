@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -44,6 +45,12 @@ public class CarOverviewController {
     private Button switchButton;
     @FXML
     private Button deleteButton;
+    @FXML
+    private Button updatePropertyButton;
+    @FXML
+    private Button newPropertyButton;
+    @FXML
+    private Button newDeviceButton;
     @FXML
     private TableView<Property> propertyTable;
     @FXML
@@ -224,7 +231,7 @@ public class CarOverviewController {
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Device Selected");
+            alert.setHeaderText("No Property Selected");
             alert.setContentText("Please select a property to update.");
 
             alert.showAndWait();   
@@ -249,6 +256,14 @@ public class CarOverviewController {
 		switchButton.setBackground(background);
 		BackgroundImage backgroundImageDelete = new BackgroundImage( new Image( getClass().getResource("../img/delete.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Background backgroundDelete = new Background(backgroundImageDelete);
-		deleteButton.setBackground(backgroundDelete);    	
+		deleteButton.setBackground(backgroundDelete); 
+		BackgroundImage backgroundImageUpdate = new BackgroundImage( new Image( getClass().getResource("../img/edit1.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background backgroundUpdate = new Background(backgroundImageUpdate);
+		updatePropertyButton.setBackground(backgroundUpdate);
+		BackgroundImage backgroundImageNew = new BackgroundImage( new Image( getClass().getResource("../img/new1.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background backgroundNew = new Background(backgroundImageNew);		
+        newPropertyButton.setBackground(backgroundNew);
+		Image newDeviceImage = new Image( getClass().getResourceAsStream("../img/new2.png"));
+        newDeviceButton.setGraphic((new ImageView(newDeviceImage)));
     }
 }

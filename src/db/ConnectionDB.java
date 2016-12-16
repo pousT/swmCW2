@@ -39,7 +39,12 @@ public class ConnectionDB {
 		}   	
     	return instance;
 	}
-    
+    /**
+     * private constructor for singleton pattern 
+     */
+    private ConnectionDB() {
+    	
+    }
     /**
      * this method is used to change the max connection to database.
      */

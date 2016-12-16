@@ -1,0 +1,64 @@
+/*root类选择器给所有的元素设置样式*/
+.root {
+    -fx-font-family: "微软雅黑";
+    -fx-font-size: 14px;
+    -fx-background-image: url(../img/background.png);
+    -fx-background-size: stretch stretch;
+    -fx-background-position: center center;
+}
+
+.background {
+    -fx-background-color: #FFCCCC;
+}
+
+.table-view {
+    -fx-base: #FFCCCC;
+    -fx-control-inner-background: #FFCCCC;
+    -fx-background-color: #FFCCCC;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color: 
+        transparent
+        transparent
+        derive(-fx-base, 80%) 
+        transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #666666;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+.iconBt {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #666666;
+}
+
+.menu-bar {
+    -fx-background-color: derive(#FF9999,20%);
+}
+.nameLabel {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #666666;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;    
+}
