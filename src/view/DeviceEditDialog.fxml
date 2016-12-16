@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="280.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DeviceEditDialogController">
+<AnchorPane prefHeight="280.0" prefWidth="380.0" styleClass="background" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DeviceEditDialogController">
    <children>
       <GridPane layoutX="90.0" layoutY="132.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
         <columnConstraints>
@@ -45,7 +45,7 @@
       </GridPane>
       <ButtonBar layoutX="153.0" layoutY="216.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button mnemonicParsing="false" onAction="#handleOk" text="ok" />
+          <Button defaultButton="true" mnemonicParsing="false" onAction="#handleOk" text="ok" />
             <Button mnemonicParsing="false" onAction="#handleCancel" text="cancel" />
         </buttons>
       </ButtonBar>
