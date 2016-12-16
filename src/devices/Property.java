@@ -8,8 +8,8 @@ public class Property {
 	private StringProperty value;
 	/**
 	 * user specified device parameter
-	 * @param name
-	 * @param value
+	 * @param name property name
+	 * @param value property value
 	 */
 	public Property(String name, String value) {
 		this.name = new SimpleStringProperty(name);

@@ -44,7 +44,7 @@ public class MainApp extends Application {
     }
     /**
      * Returns the data as an observable list of cars. 
-     * 
+     * @return list of car
      */
     public ObservableList<Car> getcarData() {
         return carData;
@@ -79,7 +79,7 @@ public class MainApp extends Application {
     }
     /**
      * Returns the main stage.
-     * @return
+     * @return primary stage
      */
     public Stage getPrimaryStage() {
         return primaryStage;
@@ -107,7 +107,6 @@ public class MainApp extends Application {
 	 * clicks OK, the device is created and true
 	 * is returned.
 	 * 
-	 * @param car the car object to add device 
 	 * @return true if the user clicked OK, false otherwise.
 	 */
 	public boolean showDevicenNewDialog() {
@@ -142,7 +141,7 @@ public class MainApp extends Application {
 	}
 	/**
 	 * Open a dialog to add new property for a specified car device
-	 * @param selectedDevice 
+	 * @param selectedDevice device to be add property
 	 */
 	public void showPropertyNewDialog(Device selectedDevice) {
 		try {
@@ -177,8 +176,9 @@ public class MainApp extends Application {
 	}
 	/**
 	 * Open a dialog to update a selected property
-	 * @param selectedProperty
-	 * @return
+	 * @param selectedDevice device the property belongs to
+	 * @param selectedProperty selected property to be edit
+	 * @return true if the user clicked OK, false otherwise.
 	 */
 	public boolean showPropertyEditDialog(Device selectedDevice, Property selectedProperty) {
 		try {

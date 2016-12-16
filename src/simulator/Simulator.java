@@ -36,7 +36,7 @@ public class Simulator extends Observable {
 	}
 	/**
 	 * get observable list of cars
-	 * @return
+	 * @return 	list of car
 	 */
     public ObservableList<Car> getCars() {
 		return cars;
@@ -60,11 +60,9 @@ public class Simulator extends Observable {
 	}
     
 	/**
-	 * @param String
-	 *            deviceIdentifier ; eg cId&apId&state&value eg 01&02&01&00
-	 *            state should only be 01 , or 00 value should stay as 00 for
-	 *            now This should be called as soon as the web app decides to
-	 *            add a new device
+	 * Add device based on input. This should be called as soon as the web app decides to add a new device
+	 * @param deviceIdentifier combination of cId dId state value
+	 *           
 	 */
 
 	public void addDevice(String deviceIdentifier) {
@@ -97,8 +95,8 @@ public class Simulator extends Observable {
 	/**
 	 * Should be called when the web app chooses to remove a device
 	 * 
-	 * @param removeIdentifier
-	 *            ; eg 00&02 , cId&dId
+	 * @param removeIdentifier combination of cid and did
+	 *           
 	 */
 
 	public void removeDevice(String removeIdentifier) {
@@ -125,10 +123,9 @@ public class Simulator extends Observable {
 	 * Should be called regularly (perhaps in a different thread) to constantly
 	 * relay the current state of a device to the web app
 	 * 
-	 * @param dataRequest
-	 *            ; cId&dId ; eg 00&01 - gets state of device 02 in car
-	 *            00
-	 * @return state of car, eg 00 (off) or 01 (on)
+	 * @param dataRequest combination of cid and did
+	 *            
+	 * @return state of car eg 00 (off) or 01 (on)
 	 */
 
 	public int getState(String dataRequest) {
@@ -153,9 +150,8 @@ public class Simulator extends Observable {
 	}
 	
 	/* Should be called to get the power for devices
-	 * @param dataRequest
-	 *            ; cId&dId ; eg 00&01 - gets power of device 01 in car
-	 *            00
+	 * @param dataRequest combination of cid and did
+	 *            
 	 * @return power of device
 	 */
 	public int getPower(String dataRequest) {
@@ -178,7 +174,7 @@ public class Simulator extends Observable {
 	}
 	/**
 	 * This should be called as soon as the web app turns on/off a device
-	 * @param dataReceived ; cId&dId&state ;  eg 00&02&01 turns on the device 02 in car 00
+	 * @param dataReceived ; combination of cid did and state
 	 */
 
 	public void changeState(String dataReceived) {
@@ -189,7 +185,7 @@ public class Simulator extends Observable {
 	}
 	/**
 	 * this should be called as the web app create a new property of a specified car device, or change property value
-	 * @param commands
+	 * @param commands combination of cid, did, property name and property value
 	 */
 	public void addProperty(String commands) {
 		String[] splitIdentifier = commands.split("&");
@@ -219,7 +215,8 @@ public class Simulator extends Observable {
 		
 	}
 	/**
-	/* This should be called to provide real temperature.
+	 * This should be called to provide real temperature.
+	 * @return temperature of car
 	 */
 	public int getTemperature() {
 		int max=35;

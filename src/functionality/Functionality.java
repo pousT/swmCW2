@@ -7,6 +7,7 @@ public abstract class Functionality {
 	abstract public void sendCommand();
 	/**
 	 * get user command directly from gui
+	 * @param cmd user command
 	 */
 	abstract public void sendCommand(String cmd);
 }

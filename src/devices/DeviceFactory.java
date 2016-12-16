@@ -13,8 +13,8 @@ public class DeviceFactory implements IDeviceFactory {
 	 * @author tangshulan
 	 * @param deviceId id of device
 	 * @param carId id of car
-	 * @state device state
-	 * @return 
+	 * @param state device state
+	 * @return new device
 	 */
 	@Override
 	public Device createDevice(int deviceId, int carId, int state) {

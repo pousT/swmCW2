@@ -59,7 +59,7 @@ public class Device implements Observer, Runnable {
 	}
 	/**
 	 * set id property
-	 * @param int id
+	 * @param deviceId did
 	 */
 	public void setDeviceId(int deviceId) {
 		this.deviceId.set(deviceId);
@@ -108,8 +108,8 @@ public class Device implements Observer, Runnable {
 
 	/**
 	 * add new property
-	 * @param propertyName
-	 * @param value
+	 * @param propertyName pname
+	 * @param value property value
 	 */
 	public void addNewProperty(String propertyName, String value){
 		
@@ -123,7 +123,7 @@ public class Device implements Observer, Runnable {
 	}
 	/**
 	 * set device type property
-	 * @param type
+	 * @param type device type
 	 */
 	public void setDeviceType(String type) {
 		this.deviceType.set(type); 
