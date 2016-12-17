@@ -4,10 +4,20 @@ This is a connected car device management application which contains a GUI and i
 
 
 ####demo:  
-Check device detail:
+Check device detail and change state:＜/br＞
 ![image](https://github.com/pousT/swmCW2/blob/master/demo/checkDevice.gif)   
 
+</br>Add new device:＜/br＞
+![image](https://github.com/pousT/swmCW2/blob/master/demo/addDevice.gif)   
 
+</br>Delete device:＜/br＞
+![image](https://github.com/pousT/swmCW2/blob/master/demo/deleteDevice.gif)   
+
+</br>Add device property:＜/br＞
+![image](https://github.com/pousT/swmCW2/blob/master/demo/addProperty.gif)   
+
+</br>Modify device property:＜/br＞
+![image](https://github.com/pousT/swmCW2/blob/master/demo/updateProperty.gif)   
 
 
 
