@@ -23,7 +23,7 @@ public class ChangeState extends Functionality{
 	   }
 	   /**
 	    * get ChangeState instance method  
-	    * @return
+	    * @return change state instance
 	    */
 	   synchronized public static ChangeState getInstance() {
 			if(instance == null){

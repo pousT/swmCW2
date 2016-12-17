@@ -63,7 +63,7 @@ public class ModeDevice extends Functionality{
 	}
 /**
  * this method determine mode is used to determine mode
- * 
+ * @param mode mode name
  */
 	public void determineMode(String mode) {
 		switch (mode) {

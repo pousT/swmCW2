@@ -7,6 +7,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Device implements Observer, Runnable {
 
@@ -15,6 +17,10 @@ public class Device implements Observer, Runnable {
 	private IntegerProperty state;
 	private IntegerProperty power;
 	/**
+	 * observable list of user defined device properties
+	 */
+	private ObservableList<Property> properties;
+	/**
 	 * device type 
 	 */
 	private StringProperty deviceType;
@@ -22,21 +28,24 @@ public class Device implements Observer, Runnable {
  * create a specified device, set power to 100
  * @param deviceId id of device
  * @param carId id of car
+ * @param state device state 
  */
-	public Device(int deviceId, int carId) {
+	public Device(int deviceId, int carId, int state) {
 		this.deviceId=new SimpleIntegerProperty(deviceId);
 		this.carId = new SimpleIntegerProperty(carId);
-		this.state = new SimpleIntegerProperty(0);
+		this.state = new SimpleIntegerProperty(state);
 		this.power = new SimpleIntegerProperty(100);
 		this.deviceType = new SimpleStringProperty("Device");
+		this.properties =  FXCollections.observableArrayList();
 		System.out.println(this.toString());
 	}
+	
 	/**
 	 *  Device information, separated from constructor 
 	 */
 	@Override
 	public String toString() {
-		return "Car " + carId + " Device " + deviceId + " created";
+		return "Car " + carId + " Device " + deviceId + ", " + getDeviceType()+  " created";
 	}
 	/**
 	 * get device id property
@@ -50,7 +59,7 @@ public class Device implements Observer, Runnable {
 	}
 	/**
 	 * set id property
-	 * @param int id
+	 * @param deviceId did
 	 */
 	public void setDeviceId(int deviceId) {
 		this.deviceId.set(deviceId);
@@ -89,12 +98,32 @@ public class Device implements Observer, Runnable {
 	public int getCarId() {
 		return carId.get();
 	}
+	/**
+	 * get property list
+	 * @return properties
+	 */
+	public ObservableList<Property> getProperties() {
+		return properties;
+	}
+
+	/**
+	 * add new property
+	 * @param propertyName pname
+	 * @param value property value
+	 */
+	public void addNewProperty(String propertyName, String value){
+		
+		Property newProperty = new Property(propertyName, value);
+		properties.add(newProperty);
+		
+	}
+	
 	public void notifySensor(int state) {
 		System.out.println("!!!!");
 	}
 	/**
 	 * set device type property
-	 * @param type
+	 * @param type device type
 	 */
 	public void setDeviceType(String type) {
 		this.deviceType.set(type); 

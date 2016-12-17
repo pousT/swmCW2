@@ -1,12 +1,26 @@
 package view;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import Main.MainApp;
-import car.Car;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import main.MainApp;
 
+
+
+import car.Car;
 import devices.Device;
+import devices.Property;
+import functionality.ChangeState;
 import functionality.DeleteDevice;
 public class CarOverviewController {
 	@FXML
@@ -27,9 +41,25 @@ public class CarOverviewController {
     private Label stateLabel;
     @FXML
     private Label powerLabel;
-
-	//reference to main app
+    @FXML
+    private Button switchButton;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private Button updatePropertyButton;
+    @FXML
+    private Button newPropertyButton;
+    @FXML
+    private Button newDeviceButton;
+    @FXML
+    private TableView<Property> propertyTable;
+    @FXML
+	private TableColumn<Property, String> propertyNameColumn;
+    @FXML
+	private TableColumn<Property, String> propertyValueColumn;
+    
 	private MainApp mainApp;
+	private Property propertySelected;
     /**
      * The constructor.
      * The constructor is called before the initialize() method.
@@ -58,17 +88,39 @@ public class CarOverviewController {
     				(observable, oldValue, newValue) -> showDeviceDetails(newValue));
         }
 	}
+    /**
+     * Show details of a selected device
+     * @param device
+     */
     private void showDeviceDetails(Device device) {
     	if (device != null) {
-    		// Fill the labels with info from the person object.
+    		if(device.getState() == 0) {
+    			stateLabel.setText("OFF");
+    			BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("../img/off.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    	        Background background = new Background(backgroundImage);
+    			switchButton.setBackground(background);
+    			switchButton.setText("");
+            }
+    		else {
+    			stateLabel.setText("ON");
+    			BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("../img/on.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    	        Background background = new Background(backgroundImage);
+    			switchButton.setBackground(background);
+    			switchButton.setText("");
+    		}
+    		// Fill the labels with info from the device object.
     		deviceIdLabel.setText(Integer.toString(device.getDeviceId()));
     		carIdLabel.setText(Integer.toString(device.getCarId()));
-    		stateLabel.setText(Integer.toString(device.getState()));
     		powerLabel.setText(Integer.toString(device.getPower()));
     		deviceTypeLabel.setText(device.getDeviceType());
-    		
+    		// FIll property table
+    		propertyTable.setItems(device.getProperties());
+            propertyNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+            propertyValueColumn.setCellValueFactory(cellData -> cellData.getValue().valueProperty());
+    		propertyTable.getSelectionModel().selectedItemProperty().addListener(
+    				(observable, oldValue, newValue) -> setProperty(newValue));    		
     	} else {
-    		// Person is null, remove all the text.
+    		// device is null, remove all the text.
     		deviceIdLabel.setText("");
     		carIdLabel.setText("");
     		stateLabel.setText("");
@@ -77,16 +129,114 @@ public class CarOverviewController {
     	}
     }
     /**
+     * set user selected property
+     * @param newValue
+     */
+    private void setProperty(Property newValue) {
+		this.propertySelected = newValue;
+	}
+	/**
      * Called when the user clicks on the delete button.
      */
     @FXML
     private void handleDeleteDevice() {
-    	System.out.println("delete");
-        String cid = carIdLabel.getText();
-        String did = deviceIdLabel.getText();
-        String cmd = cid + "," + did;
-        DeleteDevice.getInstance().sendCommand(cmd);
+    	int selectedIndex = deviceTable.getSelectionModel().getSelectedIndex();
+    	if(selectedIndex < 0) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Device Selected");
+            alert.setContentText("Please select a device.");
+
+            alert.showAndWait();    		
+    	}
+    	else {
+	        String cid = carIdLabel.getText();
+	        String did = deviceIdLabel.getText();
+	        String cmd = cid + "," + did;
+	        DeleteDevice.getInstance().sendCommand(cmd);    		
+    	}
+
     }
+    /**
+     * Called when the user clicks on the switch button.
+     */
+    @FXML
+    private void handleChangeState() {
+    	int selectedIndex = deviceTable.getSelectionModel().getSelectedIndex();
+    	if(selectedIndex < 0) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Device Selected");
+            alert.setContentText("Please select a device.");
+
+            alert.showAndWait();    		
+    	}
+    	else {
+	        String cid = carIdLabel.getText();
+	        String did = deviceIdLabel.getText();
+	        String curState = stateLabel.getText();
+	        String state = null;
+	        if(curState == "OFF") {
+	        	state = "1"; // if off, switch to ON	        	
+	        } else if (curState == "ON") {
+	        	state = "0";
+	        }
+	        String cmd = cid + "," + did + "," + state;
+	        ChangeState.getInstance().sendCommand(cmd); 
+	        showDeviceDetails(deviceTable.getSelectionModel().getSelectedItem());
+    	}
+
+    }
+    /**
+     * Called when the user clicks on the new button.
+     */
+    @FXML
+    private void handleNewDevice() {
+		mainApp.showDevicenNewDialog();
+    }
+    @FXML
+    private void handleNewProperty() {
+    	int dIndex = deviceTable.getSelectionModel().getSelectedIndex();
+    	if (dIndex < 0) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Device Selected");
+            alert.setContentText("Please select a device to add property.");
+
+            alert.showAndWait();      		
+    	} else {
+    	Device selectedDevice = deviceTable.getSelectionModel().getSelectedItem();
+    	mainApp.showPropertyNewDialog(selectedDevice);    		
+    	}
+    }
+	/**
+	 * Called when the user clicks the update button. Opens a dialog to edit
+	 * details for the selected property.
+	 */
+	@FXML
+	private void handleUpdateProperty() {
+		Property selectedProperty = propertyTable.getSelectionModel().getSelectedItem();
+		Device selectedDevice = deviceTable.getSelectionModel().getSelectedItem();
+		if (selectedProperty != null) {
+			boolean okClicked = mainApp.showPropertyEditDialog(selectedDevice,selectedProperty);
+			if (okClicked) {
+				showDeviceDetails(selectedDevice);
+			}
+
+		} else {
+			// Nothing selected.
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Property Selected");
+            alert.setContentText("Please select a property to update.");
+
+            alert.showAndWait();   
+		}
+	}
 	/**
      * Is called by the main application to give a reference back to itself.
      * 
@@ -95,6 +245,25 @@ public class CarOverviewController {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
         // Add observable list data to the table
-        carTable.setItems(mainApp.getcarData());        
+        carTable.setItems(mainApp.getcarData()); 
+    }
+    /**
+     * set icons 
+     */
+    public void setImges() {
+		BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("../img/off.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background background = new Background(backgroundImage);
+		switchButton.setBackground(background);
+		BackgroundImage backgroundImageDelete = new BackgroundImage( new Image( getClass().getResource("../img/delete.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background backgroundDelete = new Background(backgroundImageDelete);
+		deleteButton.setBackground(backgroundDelete); 
+		BackgroundImage backgroundImageUpdate = new BackgroundImage( new Image( getClass().getResource("../img/edit1.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background backgroundUpdate = new Background(backgroundImageUpdate);
+		updatePropertyButton.setBackground(backgroundUpdate);
+		BackgroundImage backgroundImageNew = new BackgroundImage( new Image( getClass().getResource("../img/new1.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background backgroundNew = new Background(backgroundImageNew);		
+        newPropertyButton.setBackground(backgroundNew);
+		Image newDeviceImage = new Image( getClass().getResourceAsStream("../img/new2.png"));
+        newDeviceButton.setGraphic((new ImageView(newDeviceImage)));
     }
 }

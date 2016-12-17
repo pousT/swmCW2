@@ -36,7 +36,7 @@ public class Simulator extends Observable {
 	}
 	/**
 	 * get observable list of cars
-	 * @return
+	 * @return 	list of car
 	 */
     public ObservableList<Car> getCars() {
 		return cars;
@@ -60,35 +60,34 @@ public class Simulator extends Observable {
 	}
     
 	/**
-	 * @param String
-	 *            deviceIdentifier ; eg cId&apId&state&value eg 01&02&01&00
-	 *            state should only be 01 , or 00 value should stay as 00 for
-	 *            now This should be called as soon as the web app decides to
-	 *            add a new device
+	 * Add device based on input. This should be called as soon as the web app decides to add a new device
+	 * @param deviceIdentifier combination of cId dId state value
+	 *           
 	 */
 
 	public void addDevice(String deviceIdentifier) {
-
+        System.out.println(deviceIdentifier);		
 		String[] splitIdentifier = deviceIdentifier.split("&");
 		int carId = Integer.parseInt(splitIdentifier[0]);
 		int deviceId = Integer.parseInt(splitIdentifier[1]);
+		int state = Integer.parseInt(splitIdentifier[2]);
         Boolean carExists = false;
         System.out.println("Success!!");
         
 		for (int i = 0; i < cars.size(); i++) {
 			if (cars.get(i).getCarId() == carId) {
-				cars.get(i).addNewDevice(deviceId);
-				int length = cars.get(i).devices.size();
-				Device device = cars.get(i).devices.get(length-1);
+				cars.get(i).addNewDevice(deviceId,state);
+				int length = cars.get(i).getDevices().size();
+				Device device = cars.get(i).getDevices().get(length-1);
 				this.addObserver(device);    // When the device is created, it will be added as a observer.
 				carExists = true;
 			}
 		}
 		if (carExists == false) {              // If the car doesn't exists, create this car and then create the specified device
 			addNewCar(carId, factory);
-			cars.get(cars.size()-1).addNewDevice(deviceId);
-			int length = cars.get(cars.size()-1).devices.size();
-			Device device = cars.get(cars.size()-1).devices.get(length-1);
+			cars.get(cars.size()-1).addNewDevice(deviceId,state);
+			int length = cars.get(cars.size()-1).getDevices().size();
+			Device device = cars.get(cars.size()-1).getDevices().get(length-1);
 			this.addObserver(device);
 		}
 	}
@@ -96,8 +95,8 @@ public class Simulator extends Observable {
 	/**
 	 * Should be called when the web app chooses to remove a device
 	 * 
-	 * @param removeIdentifier
-	 *            ; eg 00&02 , cId&dId
+	 * @param removeIdentifier combination of cid and did
+	 *           
 	 */
 
 	public void removeDevice(String removeIdentifier) {
@@ -108,11 +107,11 @@ public class Simulator extends Observable {
 
 		for (int i = 0; i < cars.size(); i++) {
 			if (cars.get(i).getCarId() == carId) {
-				for (int j = 0; j < cars.get(i).devices.size(); j++) {
-					if (cars.get(i).devices.get(j).getDeviceId() == deviceId) {
-						Device device = cars.get(i).devices.get(j);
+				for (int j = 0; j < cars.get(i).getDevices().size(); j++) {
+					if (cars.get(i).getDevices().get(j).getDeviceId() == deviceId) {
+						Device device = cars.get(i).getDevices().get(j);
 						this.deleteObserver(device);       // When this device is removed, we also delete this observer.
-						cars.get(i).devices.remove(j);	 
+						cars.get(i).getDevices().remove(j);	 
 					}
 				}
 
@@ -124,10 +123,9 @@ public class Simulator extends Observable {
 	 * Should be called regularly (perhaps in a different thread) to constantly
 	 * relay the current state of a device to the web app
 	 * 
-	 * @param dataRequest
-	 *            ; cId&dId ; eg 00&01 - gets state of device 02 in car
-	 *            00
-	 * @return state of car, eg 00 (off) or 01 (on)
+	 * @param dataRequest combination of cid and did
+	 *            
+	 * @return state of car eg 00 (off) or 01 (on)
 	 */
 
 	public int getState(String dataRequest) {
@@ -139,9 +137,9 @@ public class Simulator extends Observable {
 
 		for (int i = 0; i < cars.size(); i++) {
 			if (cars.get(i).getCarId() == carId) {
-				for (int j = 0; j < cars.get(i).devices.size(); j++) {
-					if (cars.get(i).devices.get(j).getDeviceId() == deviceId) {
-						returnState = cars.get(i).devices.get(j).getState();
+				for (int j = 0; j < cars.get(i).getDevices().size(); j++) {
+					if (cars.get(i).getDevices().get(j).getDeviceId() == deviceId) {
+						returnState = cars.get(i).getDevices().get(j).getState();
 //						System.out.println(returnState);
 					}
 				}
@@ -152,9 +150,8 @@ public class Simulator extends Observable {
 	}
 	
 	/* Should be called to get the power for devices
-	 * @param dataRequest
-	 *            ; cId&dId ; eg 00&01 - gets power of device 01 in car
-	 *            00
+	 * @param dataRequest combination of cid and did
+	 *            
 	 * @return power of device
 	 */
 	public int getPower(String dataRequest) {
@@ -163,12 +160,12 @@ public class Simulator extends Observable {
 		String[] splitData = dataRequest.split("&");
 		int carId = Integer.parseInt(splitData[0]);
 		int deviceId = Integer.parseInt(splitData[1]);
-		
+
 		for (int i = 0; i < cars.size(); i++) {
 			if (cars.get(i).getCarId() == carId) {
-				for (int j = 0; j < cars.get(i).devices.size(); j++) {
-					if (cars.get(i).devices.get(j).getDeviceId() == deviceId) {
-						returnState = cars.get(i).devices.get(j).getPower();
+				for (int j = 0; j < cars.get(i).getDevices().size(); j++) {
+					if (cars.get(i).getDevices().get(j).getDeviceId() == deviceId) {
+						returnState = cars.get(i).getDevices().get(j).getPower();
 					}
 				}
 			}
@@ -177,7 +174,7 @@ public class Simulator extends Observable {
 	}
 	/**
 	 * This should be called as soon as the web app turns on/off a device
-	 * @param dataReceived ; cId&dId&state ;  eg 00&02&01 turns on the device 02 in car 00
+	 * @param dataReceived ; combination of cid did and state
 	 */
 
 	public void changeState(String dataReceived) {
@@ -186,8 +183,40 @@ public class Simulator extends Observable {
 		this.setChanged();
 		this.notifyObservers(statecommand); 
 	}
-	
-	/* This should be called to provide real temperature.
+	/**
+	 * this should be called as the web app create a new property of a specified car device, or change property value
+	 * @param commands combination of cid, did, property name and property value
+	 */
+	public void addProperty(String commands) {
+		String[] splitIdentifier = commands.split("&");
+		int carId = Integer.parseInt(splitIdentifier[0]);
+		int deviceId = Integer.parseInt(splitIdentifier[1]);
+		String propertyName =splitIdentifier[2];
+		String propertyValue = splitIdentifier[3];
+        System.out.println("Success!!");
+        
+		for (int i = 0; i < cars.size(); i++) {
+			if (cars.get(i).getCarId() == carId) {
+				for (int j = 0; j < cars.get(i).getDevices().size(); j++) {
+					if (cars.get(i).getDevices().get(j).getDeviceId() == deviceId) {
+						Device device = cars.get(i).getDevices().get(j);
+						for(int k = 0; k < device.getProperties().size(); k++) {
+							if(device.getProperties().get(k).getName().equals(propertyName)) {
+								device.getProperties().get(k).setValue(propertyValue);
+								System.out.println("find property");
+								return;
+							}
+						}
+						device.addNewProperty(propertyName, propertyValue);
+					}
+				}
+			}
+		}
+		
+	}
+	/**
+	 * This should be called to provide real temperature.
+	 * @return temperature of car
 	 */
 	public int getTemperature() {
 		int max=35;

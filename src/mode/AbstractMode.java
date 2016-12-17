@@ -11,21 +11,17 @@ public abstract class AbstractMode extends TimerTask{
 	/**
 	 * initialState() is used to read the (mode)_config.csv file,
 	 * and store the information into hashmap.
-	 *
-	 * @return void
 	 */
 	abstract public void initial();
 	/**
 	 * getAllConsumption() is used to get all consumption from database  
-	 * 
+	 * @return consumption
 	 */
 	abstract public int getAllConsumption();
 	/**
 	 * checkTemperature(int) is used to check temperature if the current temperature is higher than the upper temperature,
 	 * if higher, then close device 1 which is identified the heater.
-	 * else then open device 1.
-	 * 
-	 * @return void
+	 * else then open device 1
 	 */
 	public void checkTemperature(int currentTem) {};
 	/**
@@ -33,7 +29,6 @@ public abstract class AbstractMode extends TimerTask{
 	 * if higher, then close the device in a priority queue which user inputs. 
 	 * The device in priority queue is identified when the consumption is higher, which device the user want to close first. 
 	 * 
-	 * @return void
 	 */
 	public void checkConsumption() {};
 	/**
@@ -46,7 +41,6 @@ public abstract class AbstractMode extends TimerTask{
 	/**
 	 * updateMYSQLCurrentDevice(int) is used to update value for each device's consumption
 	 * 
-	 * @return void
 	 */
 	abstract public void updateMYSQLCurrentDevice(int counter);
 }

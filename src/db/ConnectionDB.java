@@ -39,7 +39,12 @@ public class ConnectionDB {
 		}   	
     	return instance;
 	}
-    
+    /**
+     * private constructor for singleton pattern 
+     */
+    private ConnectionDB() {
+    	
+    }
     /**
      * this method is used to change the max connection to database.
      */
@@ -104,7 +109,7 @@ public class ConnectionDB {
     }
     
     /**
-     * this method is used to check CID&DID's state from currentDevice table.
+     * this method is used to check CID and DID's state from currentDevice table.
      * @return String
      */
     public String checkState(String cdid) {
@@ -138,7 +143,7 @@ public class ConnectionDB {
     
     /**
      * this method is used to change all the device's state on.
-     * @return List<String>
+     * @return list of car that is on 
      */
     public List<String> getStateOn() {
 	
@@ -215,9 +220,8 @@ public class ConnectionDB {
     }
     
     /**
-     * this method is used to get the CID&DID from table and store them into a list.
-     * @return List<String>
-     * @throws SQLException 
+     * this method is used to get the CID and DID from table and store them into a list.
+     * @return list of cid and did
      */
     public List<String> getID() {
     	
@@ -268,7 +272,7 @@ public class ConnectionDB {
 
     /**
      * this method is used to get the VALUE from table and return as a String.
-     * @return String
+     * @return device value
      */
     public String getValue(String cdid) {
     	
@@ -294,7 +298,7 @@ public class ConnectionDB {
     
     /**
      * this method is used to insert the sum consumption into History table.
-     * @return void
+     * @param sum  sum of value
      */
     public void insertHistory(long sum) {    	
     	conn = getConnection();        
@@ -372,6 +376,7 @@ public class ConnectionDB {
     
     /**
      * this method is used to insert into the currentDevice new Entry.
+     * @param data device cid did dvalue and state
      */
     public void insert(String data){  
     	
@@ -421,6 +426,7 @@ public class ConnectionDB {
     
     /**
      * this method is used to delete from the currentDevice table.
+     * @param data device cid did
      */
     public void delete(String data) {
     	
@@ -450,6 +456,8 @@ public class ConnectionDB {
     
     /**
      * this method is used to update the currentDevice table VALUE.
+     * @param data device cid, did
+     * @param sum sum of device value
      */
     public void updateValue(String data, long sum) 
     {
@@ -478,6 +486,8 @@ public class ConnectionDB {
     
     /**
      * this method is used to update the currentDevice table DSTATE.
+     * @param data device cid did 
+     * @param state device state
      */
     public void updateState(String data, String state) 
     {
@@ -517,6 +527,9 @@ public class ConnectionDB {
     
     /**
      * this method is used to insert into currentDevice table the attribute of HOUR_INT.
+     * @param data device did cid 
+     * @param hour hour value
+     * @param sum device hour value
      */
     public void insertHourValue(String data, int hour, long sum){  
     	
@@ -552,14 +565,13 @@ public class ConnectionDB {
 	            
             }
         } catch (SQLException e) {
-        	// TODO Auto-generated catch block
         	e.printStackTrace();
 		}  
         
         try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
     }
@@ -589,6 +601,7 @@ public class ConnectionDB {
 
     /**
      * this method is used to update the currentDevice table the attribute of DVALUE.
+     *
      */
     public void updateCurrentDeviceDValue(String data) {
     	conn = getConnection(); 
@@ -613,6 +626,8 @@ public class ConnectionDB {
     
     /**
      * this method is used to update the currentDevice table the attribute of DID'State.
+     * @param did device id
+     * @param state device state
      */
     public void updateDIDState(String did, String state) 
     {	
@@ -640,5 +655,104 @@ public class ConnectionDB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-    }   
+    }
+    /**
+     * Insert a property for a specified car device into Property table
+     * @param data
+     */
+	public void insertProperty(String data) {
+        conn = getConnection(); 
+        String linedata[] = data.split(",");
+        try {
+        	String ssql = "SELECT * FROM Property WHERE (CID='"+linedata[0]+"') AND (DID='"+linedata[1] +"') AND (PNAME='"+ linedata[2]+"')";
+        	st = conn.createStatement();
+            ResultSet rs = st.executeQuery(ssql);
+            int counter = 0;
+            	
+            while(rs.next()) {
+            	counter = rs.getInt(1);
+            	System.out.println(rs.getString("DID")+"!111111111");
+            }
+                   
+           	if(counter == 0){ // no data 
+            	
+	            String sql = "INSERT INTO Property(CID, DID, PNAME, PVALUE)"    
+	                        + " VALUES ('"+linedata[0]+"','"+linedata[1]+"','"+linedata[2]+"','"+linedata[3]+"')";   
+	            System.out.println("sql="+sql);  
+	                    
+	            st = conn.createStatement();
+						  
+	            int count = st.executeUpdate(sql);
+	                        
+	            System.out.println("insert into Property " + count + " numbers of data");   
+	                        
+	            st.close();
+	            conn.close(); 
+           	} else {
+	        	String sql = "UPDATE Property SET PVALUE = '"+linedata[3]+"' WHERE (CID='"+linedata[0]+"')"+"AND (DID='"+linedata[1] + "')"+"AND (PNAME='"+linedata[2]+"')";
+		        
+	        	st = conn.createStatement();
+			
+	        	int count = st.executeUpdate(sql);
+	        	
+	        	System.out.println("update from Property " + count + " numbers of data");   
+	            
+	            st.close();
+	            conn.close();           		
+           	}
+        } catch(SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+
+	public List<String> getProperty() {
+    	conn = getConnection(); 
+        List<String> result = new ArrayList<String>();
+    	
+        try{
+        	String ssql = "SELECT * FROM Property";
+        	st = conn.createStatement();
+            ResultSet rs = st.executeQuery(ssql);         
+
+            while(rs.next()) {
+                String string= null;
+                string = rs.getString("CID")+"&"+rs.getString("DID")+ "&" +rs.getString("PNAME") + "&" +rs.getString("PVALUE");
+            	result.add(string);
+            }
+        	
+        } catch (SQLException e) {
+        	
+        	e.printStackTrace();
+		}
+        return result;
+	}
+
+	public void deletePropertyById(String cmd) {
+    	conn = getConnection(); 
+        String linedata[] = cmd.split(",");
+        
+        try {
+				
+	        	String sql = "DELETE FROM Property"
+	        				 +" WHERE (CID="+linedata[0]+")"+"AND (DID="+linedata[1]+")";
+	        
+	        	st = conn.createStatement();
+			
+	        	int count = st.executeUpdate(sql);
+	        	
+	        	System.out.println("delete from Property " + count + " numbers of data");   
+	            
+	            st.close();
+	            conn.close();
+//			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+
 }
