@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="280.0" prefWidth="380.0" styleClass="background" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DeviceEditDialogController">
+<AnchorPane prefHeight="190.0" prefWidth="380.0" styleClass="background" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DeviceEditDialogController">
    <children>
       <GridPane layoutX="90.0" layoutY="132.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
         <columnConstraints>
@@ -25,8 +25,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Car ID" />
-            <Label text="State" GridPane.rowIndex="2" />
+            <Label styleClass="nameLabel" text="Car ID" />
+            <Label styleClass="nameLabel" text="State" GridPane.rowIndex="2" />
             <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <buttons>
                   <RadioButton fx:id="offButton" mnemonicParsing="false" text="OFF">
@@ -37,16 +37,16 @@
                   <RadioButton fx:id="onButton" mnemonicParsing="false" text="ON" toggleGroup="$state" />
                </buttons>
             </ButtonBar>
-            <Label text="Device ID" GridPane.rowIndex="1" />
+            <Label styleClass="nameLabel" text="Device ID" GridPane.rowIndex="1" />
             <Label GridPane.columnIndex="1" />
             <TextField fx:id="deviceIdField" prefHeight="27.0" prefWidth="147.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ComboBox fx:id="carIdBox" prefHeight="27.0" prefWidth="241.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <ButtonBar layoutX="153.0" layoutY="216.0" prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar layoutX="153.0" layoutY="216.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0">
         <buttons>
-          <Button defaultButton="true" mnemonicParsing="false" onAction="#handleOk" text="ok" />
-            <Button mnemonicParsing="false" onAction="#handleCancel" text="cancel" />
+          <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#handleOk" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancel" />
         </buttons>
       </ButtonBar>
    </children>

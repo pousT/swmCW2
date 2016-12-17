@@ -6,9 +6,15 @@ import devices.Property;
 import functionality.CreateProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.stage.Stage;
 import main.MainApp;
 
@@ -19,6 +25,10 @@ public class PropertyEditDialogController {
 
     @FXML
     private TextField propertyValueField;
+    @FXML
+    private Button okButton;
+    @FXML
+    private Button cancelButton;
     private Stage dialogStage;
     private boolean okClicked = false;
 	//reference to main app
@@ -30,6 +40,7 @@ public class PropertyEditDialogController {
      */
     @FXML
     private void initialize() {
+    	setImges();
     }
     /**
      * Sets the stage of this dialog.
@@ -120,5 +131,15 @@ public class PropertyEditDialogController {
 		this.propertyNameField.setText(selectedProperty.getName());
 		
 	}
-    
+    /**
+     * set icons 
+     */
+    public void setImges() {
+		BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("../img/ok.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background background = new Background(backgroundImage);
+        okButton.setBackground(background);
+		BackgroundImage backgroundImageDelete = new BackgroundImage( new Image( getClass().getResource("../img/no.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background backgroundDelete = new Background(backgroundImageDelete);
+        cancelButton.setBackground(backgroundDelete); 
+    }    
 }
