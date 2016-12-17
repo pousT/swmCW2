@@ -1,9 +1,27 @@
 #Connected Car Application
 ===
+By [Shulan TANG]    
 This is a connected car device management application which contains a GUI and is connected to database. User can view device information in cars, add new device, delete devices and change device state. User can also add property for selected device and modify them later.
+##Project Structure:
+- src  
+source code  
+- doc  
+javadoc
+- bin  
+complied files  
+- demo  
+gif demos  
+- testdb.sql  
+file to construct database  
 
+##installation
+```console
+$ git clone https://github.com/pousT/swmCW2.git
+$ cd swmCW2/bin
+$ java -jar swmCW2.jar
+```
 
-####demo:  
+##demo:  
 Check device detail and change state:</br>
 ![image](https://github.com/pousT/swmCW2/blob/master/demo/checkDevice.gif)   
 
