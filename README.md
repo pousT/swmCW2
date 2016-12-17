@@ -3,7 +3,7 @@
 This is a connected car device management application which contains a GUI and is connected to database. User can view device information in cars, add new device, delete devices and change device state. User can also add property for selected device and modify them later.
 
 
-####demo:  
+####Demo:  
 Check device detail and change state:</br>
 ![image](https://github.com/pousT/swmCW2/blob/master/demo/checkDevice.gif)   
 
