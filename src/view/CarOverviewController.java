@@ -194,7 +194,7 @@ public class CarOverviewController {
      */
     @FXML
     private void handleNewDevice() {
-		mainApp.showDevicenNewDialog();
+		mainApp.showDeviceNewDialog();
     }
     @FXML
     private void handleNewProperty() {

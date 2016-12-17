@@ -110,7 +110,7 @@ public class MainApp extends Application {
 	 * 
 	 * @return true if the user clicked OK, false otherwise.
 	 */
-	public boolean showDevicenNewDialog() {
+	public boolean showDeviceNewDialog() {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 			FXMLLoader loader = new FXMLLoader();
@@ -120,6 +120,7 @@ public class MainApp extends Application {
 			// Create the dialog Stage.
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("New Device");
+	        dialogStage.getIcons().add(new Image("/img/device.png"));
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(primaryStage);
 			Scene scene = new Scene(page);
@@ -157,6 +158,7 @@ public class MainApp extends Application {
 			dialogStage.setTitle("New Property");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(primaryStage);
+	        dialogStage.getIcons().add(new Image("/img/property.png"));
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 
@@ -194,6 +196,7 @@ public class MainApp extends Application {
 			dialogStage.setTitle("Update Property");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(primaryStage);
+	        dialogStage.getIcons().add(new Image("/img/property.png"));
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 

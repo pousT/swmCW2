@@ -13,6 +13,14 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -32,17 +40,23 @@ public class DeviceEditDialogController {
     private RadioButton onButton;
     @FXML
     private TextField deviceTypeField;
+    @FXML
+	private Button okButton;
+    @FXML
+	private Button cancelButton;    
     private Stage dialogStage;
     private boolean okClicked = false;
 	//reference to main app
 	private MainApp mainApp;
 	private ObservableList<Car> cars;
+
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
     @FXML
     private void initialize() {
+    	setImges();
     }
     /**
      * Sets the stage of this dialog.
@@ -171,4 +185,15 @@ public class DeviceEditDialogController {
 		}	
     	return null;
     }
+    /**
+     * set icons 
+     */
+    public void setImges() {
+		BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("../img/ok.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background background = new Background(backgroundImage);
+        okButton.setBackground(background);
+		BackgroundImage backgroundImageDelete = new BackgroundImage( new Image( getClass().getResource("../img/no.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background backgroundDelete = new Background(backgroundImageDelete);
+        cancelButton.setBackground(backgroundDelete); 
+    } 
 }
