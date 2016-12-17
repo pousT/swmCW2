@@ -15,7 +15,7 @@ gif demos
 - testdb.sql  
 file to construct database  
 
-##installation
+##Installation
 ```console
 $ git clone https://github.com/pousT/swmCW2.git
 $ cd swmCW2/bin
