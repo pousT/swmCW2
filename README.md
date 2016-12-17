@@ -5,7 +5,7 @@ This is a connected car device management application which contains a GUI and i
 
 ####demo:  
 Check device detail:
-![image](https://github.com/pousT/swmCW2/master/demo/checkDevice.gif )   
+![image](https://github.com/pousT/swmCW2/tree/master/demo/checkDevice.gif )   
 
 
 
